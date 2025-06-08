@@ -1,21 +1,22 @@
 package com.example.justlocal.Models;
 
 public class Product {
-    private int productID;
-    private int sellerID; // FK from Users table
+    private String productID;
+    private String sellerID;  // Changed from int to String
     private String productName;
     private String productDescription;
-    private String image; // Base64 or URL
-    private double price;
-    private int quantity;
-    private String status; // e.g., "Approved", "Rejected", "Pending"
-    private String approvedBy; // Can be user full name or user ID string
+    private String image;  // Base64 or URL
+    private String price;
+    private String quantity;
+    private String status;  // e.g., "Approved", "Rejected", "Pending"
+    private String approvedBy;  // Can be user full name or user ID string
 
-    // Constructors
+    // Default constructor required for Firebase
     public Product() {
     }
 
-    public Product(int productID, int sellerID, String productName, String productDescription, String image, double price, int quantity, String status, String approvedBy) {
+    public Product(String productID, String sellerID, String productName, String productDescription,
+                   String image, String price, String quantity, String status, String approvedBy) {
         this.productID = productID;
         this.sellerID = sellerID;
         this.productName = productName;
@@ -27,20 +28,20 @@ public class Product {
         this.approvedBy = approvedBy;
     }
 
-    // Getters and Setters
-    public int getProductID() {
+    // Getters and setters
+    public String getProductID() {
         return productID;
     }
 
-    public void setProductID(int productID) {
+    public void setProductID(String productID) {
         this.productID = productID;
     }
 
-    public int getSellerID() {
+    public String getSellerID() {
         return sellerID;
     }
 
-    public void setSellerID(int sellerID) {
+    public void setSellerID(String sellerID) {
         this.sellerID = sellerID;
     }
 
@@ -68,19 +69,19 @@ public class Product {
         this.image = image;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 
