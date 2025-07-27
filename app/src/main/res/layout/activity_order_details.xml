@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FA"
+    android:paddingTop="30dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="24dp">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="16dp"
+            android:background="#FFFFFF"
+            android:elevation="2dp">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_back"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:padding="4dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Order Details"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#1F2937"
+                android:layout_marginStart="16dp" />
+        </LinearLayout>
+
+        <!-- Order Details Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:elevation="1dp"
+            android:padding="20dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/tvOrderID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Order ID: 12345"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#1F2937" />
+
+            <TextView
+                android:id="@+id/tvCustomerID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Customer ID: cust01"
+                android:textSize="16sp"
+                android:textColor="#4B5563"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/tvContactNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contact: 091234567890"
+                android:textSize="16sp"
+                android:textColor="#4B5563"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/tvPaymentMethod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Payment Method: GCash"
+                android:textSize="16sp"
+                android:textColor="#4B5563"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/tvDeliveryMethod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delivery Method: Delivery"
+                android:textSize="16sp"
+                android:textColor="#4B5563"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/tvTrackingNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tracking No: track001"
+                android:textSize="16sp"
+                android:textColor="#4B5563"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/tvOrderDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Order Date: Jul 27, 2025"
+                android:textSize="16sp"
+                android:textColor="#4B5563"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Status: Pending"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#059669"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/tvTotalAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Amount: ₱22,999.00"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#1F2937"
+                android:layout_marginTop="8dp" />
+
+        </LinearLayout>
+
+        <!-- Action Buttons Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp">
+
+            <!-- Reject Button -->
+            <Button
+                android:id="@+id/btnRejectOrder"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="Reject Order"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#DC2626"
+                android:layout_marginEnd="8dp"
+                android:elevation="2dp" />
+
+            <!-- Accept Button -->
+            <Button
+                android:id="@+id/btnAcceptOrder"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="Accept Order"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#059669"
+                android:layout_marginStart="8dp"
+                android:elevation="2dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

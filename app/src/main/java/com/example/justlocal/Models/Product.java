@@ -10,6 +10,19 @@ public class Product {
     private String quantity;
     private String status;  // e.g., "Approved", "Rejected", "Pending"
     private String approvedBy;  // Can be user full name or user ID string
+    private boolean isFavorited;
+
+
+    private String firebaseKey;
+
+    public String getFirebaseKey() {
+        return firebaseKey;
+    }
+
+    public void setFirebaseKey(String firebaseKey) {
+        this.firebaseKey = firebaseKey;
+    }
+
 
     // Default constructor required for Firebase
     public Product() {
@@ -29,6 +42,14 @@ public class Product {
     }
 
     // Getters and setters
+
+    public boolean isFavorited() {
+        return isFavorited;
+    }
+
+    public void setFavorited(boolean favorited) {
+        isFavorited = favorited;
+    }
     public String getProductID() {
         return productID;
     }

@@ -1,7 +1,9 @@
 package com.example.justlocal.SellerClass;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -11,9 +13,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.justlocal.CustomerClass.BrowseProductsActivity;
+import com.example.justlocal.CustomerClass.ViewProductsActivity;
 import com.example.justlocal.LoginActivity;
 import com.example.justlocal.R;
 import com.example.justlocal.databinding.ActivitySellerDashboardBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SellerDashboardActivity extends AppCompatActivity {
 
@@ -24,6 +29,17 @@ public class SellerDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySellerDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
+        }
+
+
+
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        );
 
         setupViews();
         loadDashboardData();
@@ -75,7 +91,8 @@ public class SellerDashboardActivity extends AppCompatActivity {
     }
 
     private void openOrderManagement() {
-//        startActivity(new Intent(this, OrderManagementActivity.class));
+        Toast.makeText(this, "Opening Orders for Seller: " + FirebaseAuth.getInstance().getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, OrderMonitoringActivity.class));
     }
 
     private void openProfile() {

@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.justlocal.AdminClass.AdminDashboardActivity;
+import com.example.justlocal.CustomerClass.CustomerDashboardActivity;
 import com.example.justlocal.SellerClass.SellerDashboardActivity;
 import com.example.justlocal.databinding.ActivityLoginBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,9 +64,9 @@ public class LoginActivity extends AppCompatActivity {
                                                 case "seller":
                                                     startActivity(new Intent(LoginActivity.this, SellerDashboardActivity.class));
                                                     break;
-//                                                case "Customer":
-//                                                    startActivity(new Intent(LoginActivity.this, CustomerDashboardActivity.class));
-//                                                    break;
+                                                case "customer":
+                                                    startActivity(new Intent(LoginActivity.this, CustomerDashboardActivity.class));
+                                                    break;
 //                                                case "CSR":
 //                                                    startActivity(new Intent(LoginActivity.this, CSRDashboardActivity.class));
 //                                                    break;

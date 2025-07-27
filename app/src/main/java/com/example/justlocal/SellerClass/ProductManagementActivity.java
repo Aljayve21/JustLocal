@@ -1,6 +1,7 @@
 package com.example.justlocal.SellerClass;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -49,6 +50,17 @@ public class ProductManagementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityProductManagementBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
+        }
+
+
+
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        );
 
         setupViews();
         loadProducts();
@@ -110,12 +122,13 @@ public class ProductManagementActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 products.clear();
                 for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                    Product product = userSnapshot.getValue(Product.class);  // <-- fixed here
-
+                    Product product = userSnapshot.getValue(Product.class);
                     if (product != null) {
+                        product.setFirebaseKey(userSnapshot.getKey()); // Set the unique Firebase key
                         products.add(product);
                     }
                 }
+
                 filteredProducts(binding.etSearch.getText().toString());
                 updateStats();
             }
@@ -196,8 +209,8 @@ public class ProductManagementActivity extends AppCompatActivity {
                 .setTitle("Delete product")
                 .setMessage("Are you sure you want to delete " + product.getProductName() + "?")
                 .setPositiveButton("Yes", (dialog, which) -> {
-                    productsRef.child(product.getProductDescription().replace(".", ",")).removeValue() // Adjust key if needed
-                            .addOnSuccessListener(aVoid -> Toast.makeText(this, "User deleted", Toast.LENGTH_SHORT).show())
+                    productsRef.child(product.getProductID().replace(".", ",")).removeValue() // Adjust key if needed
+                            .addOnSuccessListener(aVoid -> Toast.makeText(this, "Product deleted", Toast.LENGTH_SHORT).show())
                             .addOnFailureListener(e -> Toast.makeText(this, "Failed to delete: " + e.getMessage(), Toast.LENGTH_SHORT).show());
                 })
                 .setNegativeButton("No", null)

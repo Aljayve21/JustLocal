@@ -20,6 +20,39 @@
         android:theme="@style/Theme.JustLocal"
         tools:targetApi="31">
         <activity
+            android:name=".DeliveryTracking.DeliveryTrackingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SellerClass.OrderDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SellerClass.OrderMonitoringActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerClass.MyordersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerClass.UserAddressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerClass.OrderPaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerClass.ViewProductsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerClass.BrowseProductsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerClass.CustomerDashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminClass.AdminProductManagementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminClass.EditAdminProduct"
+            android:exported="false" />
+        <activity
             android:name=".SellerClass.EditProductActivity"
             android:exported="false" />
         <activity

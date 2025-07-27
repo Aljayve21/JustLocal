@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
+//    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -44,12 +45,13 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
-    implementation(libs.firebase.database)
     implementation(libs.circleimageview)
     implementation(libs.glide)
     implementation(libs.firebase.storage)
+    implementation(libs.google.services)
+    implementation(libs.firebase.database)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation("com.google.android.gms:play-services-base:18.3.0")
+//    implementation("com.google.android.gms:play-services-base:18.3.0")
 }
