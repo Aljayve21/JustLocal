@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "658836435816",
+    "firebase_url": "https://justlocal-830c6-default-rtdb.firebaseio.com",
+    "project_id": "justlocal-830c6",
+    "storage_bucket": "justlocal-830c6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658836435816:android:8c13f4ff46f06187439cdd",
+        "android_client_info": {
+          "package_name": "com.example.justlocal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDp3vGr0GrMB9tRda0bdpEB3ytUx-4ihc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
