@@ -1,35 +1,27 @@
 package com.example.justlocal.Models;
 
+import java.util.List;
+
 public class Product {
     private String productID;
-    private String sellerID;  // Changed from int to String
+    private String sellerID;
     private String productName;
     private String productDescription;
-    private String image;  // Base64 or URL
+    private String image;
     private String price;
     private String quantity;
-    private String status;  // e.g., "Approved", "Rejected", "Pending"
-    private String approvedBy;  // Can be user full name or user ID string
+    private String status;
+    private List<Double> embedding;  // ✅ embedding field
+    private String approvedBy;
     private boolean isFavorited;
-
-
     private String firebaseKey;
 
-    public String getFirebaseKey() {
-        return firebaseKey;
-    }
-
-    public void setFirebaseKey(String firebaseKey) {
-        this.firebaseKey = firebaseKey;
-    }
-
-
     // Default constructor required for Firebase
-    public Product() {
-    }
+    public Product() {}
 
     public Product(String productID, String sellerID, String productName, String productDescription,
-                   String image, String price, String quantity, String status, String approvedBy) {
+                   String image, String price, String quantity, String status, String approvedBy,
+                   List<Double> embedding) {
         this.productID = productID;
         this.sellerID = sellerID;
         this.productName = productName;
@@ -39,9 +31,18 @@ public class Product {
         this.quantity = quantity;
         this.status = status;
         this.approvedBy = approvedBy;
+        this.embedding = embedding;
     }
 
-    // Getters and setters
+    // ✅ Getters and Setters
+
+    public String getFirebaseKey() {
+        return firebaseKey;
+    }
+
+    public void setFirebaseKey(String firebaseKey) {
+        this.firebaseKey = firebaseKey;
+    }
 
     public boolean isFavorited() {
         return isFavorited;
@@ -50,6 +51,7 @@ public class Product {
     public void setFavorited(boolean favorited) {
         isFavorited = favorited;
     }
+
     public String getProductID() {
         return productID;
     }
@@ -120,5 +122,14 @@ public class Product {
 
     public void setApprovedBy(String approvedBy) {
         this.approvedBy = approvedBy;
+    }
+
+    // ✅ Embedding getter & setter
+    public List<Double> getEmbedding() {
+        return embedding;
+    }
+
+    public void setEmbedding(List<Double> embedding) {
+        this.embedding = embedding;
     }
 }

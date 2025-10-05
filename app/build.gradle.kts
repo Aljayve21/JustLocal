@@ -30,6 +30,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        mlModelBinding = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -50,8 +51,15 @@ dependencies {
     implementation(libs.firebase.storage)
     implementation(libs.google.services)
     implementation(libs.firebase.database)
+    implementation(libs.tensorflow.lite.support)
+    implementation(libs.tensorflow.lite.metadata)
+//    implementation(libs.tensorflow.lite.task.vision)
+    implementation(libs.okhttp)
+    implementation(libs.tensorflow.lite)
+    implementation(libs.text.recognition)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
 //    implementation("com.google.android.gms:play-services-base:18.3.0")
 }

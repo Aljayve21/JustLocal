@@ -14,6 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.justlocal.DeliveryTracking.DeliveryTrackingActivity;
 import com.example.justlocal.Models.Order;
 import com.example.justlocal.ProductAdapter.OrdersAdapter;
 import com.example.justlocal.R;
@@ -60,14 +61,38 @@ public class OrderMonitoringActivity extends AppCompatActivity {
 
     private void setupRecyclerView() {
         adapter = new SellerOrdersAdapter(this, orderList, order -> {
-            Intent intent = new Intent(this, OrderDetailsActivity.class);
-            intent.putExtra("orderID", order.getOrderID());
-            startActivity(intent);
+            if (order.getStatus() != null) {
+                String status = order.getStatus().toLowerCase();
+
+                if (status.equalsIgnoreCase("accepted")
+                        || status.equalsIgnoreCase("rejected")
+                        || status.equalsIgnoreCase("processing")
+                        || status.equalsIgnoreCase("out_for_delivery")
+                        || status.equalsIgnoreCase("delivered")) {
+
+                    Intent intent = new Intent(this, DeliveryTrackingActivity.class);
+                    intent.putExtra("orderID", order.getOrderID());
+                    intent.putExtra("userRole", "seller");
+                    startActivity(intent);
+                } else {
+                    // Pending orders only
+                    Intent intent = new Intent(this, OrderDetailsActivity.class);
+                    intent.putExtra("orderID", order.getOrderID());
+                    startActivity(intent);
+                }
+
+            } else {
+                // Default: treat as pending
+                Intent intent = new Intent(this, OrderDetailsActivity.class);
+                intent.putExtra("orderID", order.getOrderID());
+                startActivity(intent);
+            }
         });
 
         binding.rvOrders.setLayoutManager(new LinearLayoutManager(this));
         binding.rvOrders.setAdapter(adapter);
     }
+
 
 
 

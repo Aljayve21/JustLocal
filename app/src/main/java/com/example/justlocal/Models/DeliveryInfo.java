@@ -6,18 +6,31 @@ public class DeliveryInfo {
     private String carrier;
     private String trackingNo;
     private String status;
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    private String timestamp;
     private String dateTime;
 
     public DeliveryInfo() {}
 
+
+
     public DeliveryInfo(String deliveryID, String orderID, String carrier,
-                        String trackingNo, String status, String dateTime) {
+                        String trackingNo, String status, String dateTime, String timestamp) {
         this.deliveryID = deliveryID;
         this.orderID = orderID;
         this.carrier = carrier;
         this.trackingNo = trackingNo;
         this.status = status;
         this.dateTime = dateTime;
+        this.timestamp = timestamp;
     }
 
     // Getters and setters...

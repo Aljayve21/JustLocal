@@ -1,6 +1,5 @@
 package com.example.justlocal.SellerClass;
 
-import android.app.ComponentCaller;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -9,15 +8,10 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.justlocal.R;
+import com.example.justlocal.Utility.TfliteEmbeddingHelper;
 import com.example.justlocal.databinding.ActivityAddProductBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +19,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AddProductActivity extends AppCompatActivity {
@@ -34,27 +30,24 @@ public class AddProductActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE_CAPTURE = 2;
 
     private ActivityAddProductBinding binding;
-
     private String base64Image = null;
+    private Bitmap selectedBitmap = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         binding = ActivityAddProductBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //Button listeners
+        // Buttons
         binding.btnSelectImage.setOnClickListener(v -> openGallery());
         binding.btnTakePhoto.setOnClickListener(v -> openCamera());
         binding.btnCancel.setOnClickListener(v -> finish());
         binding.btnSaveProduct.setOnClickListener(v -> uploadProduct());
-
         binding.btnBack.setOnClickListener(v -> finish());
     }
 
     private void openGallery() {
-           // Implement gallery selection logic
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, REQUEST_IMAGE_PICK);
     }
@@ -62,40 +55,36 @@ public class AddProductActivity extends AppCompatActivity {
     private void openCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
-
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Bitmap bitmap = null;
-
         if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_IMAGE_PICK && data != null) {
-                Uri selectedImageUri = data.getData();
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
-                } catch (IOException e) {
-                    e.printStackTrace();
+            try {
+                if (requestCode == REQUEST_IMAGE_PICK && data != null) {
+                    Uri uri = data.getData();
+                    selectedBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+                } else if (requestCode == REQUEST_IMAGE_CAPTURE && data != null) {
+                    selectedBitmap = (Bitmap) data.getExtras().get("data");
                 }
-            } else if (requestCode == REQUEST_IMAGE_CAPTURE && data != null) {
-                bitmap = (Bitmap) data.getExtras().get("data");
-            }
 
-            if (bitmap != null) {
-                binding.ivProductImage.setImageBitmap(bitmap);
-                base64Image = bitmapToBase64(bitmap);
+                if (selectedBitmap != null) {
+                    binding.ivProductImage.setImageBitmap(selectedBitmap);
+                    base64Image = bitmapToBase64(selectedBitmap);
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
 
-
     private String bitmapToBase64(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
-        byte[] imageBytes = baos.toByteArray();
-        return Base64.encodeToString(imageBytes, Base64.NO_WRAP);
+        return Base64.encodeToString(baos.toByteArray(), Base64.NO_WRAP);
     }
 
     private void uploadProduct() {
@@ -104,42 +93,63 @@ public class AddProductActivity extends AppCompatActivity {
         String price = binding.etPrice.getText().toString().trim();
         String quantity = binding.etQuantity.getText().toString().trim();
 
-        if (name.isEmpty() || description.isEmpty() || price.isEmpty() || quantity.isEmpty() || base64Image == null) {
+        if (name.isEmpty() || description.isEmpty() || price.isEmpty() || quantity.isEmpty() || selectedBitmap == null) {
             Toast.makeText(this, "Please fill all fields and select an image", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Assume you have sellerID from logged-in user session or Firebase Auth UID
-        String sellerID = getCurrentSellerID();  // <-- Implement this method based on your auth/session
+        generateAndUploadProduct(name, description, price, quantity, selectedBitmap);
+    }
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("products");
-        String productId = ref.push().getKey();
+    private void generateAndUploadProduct(String name, String desc, String price, String qty, Bitmap bitmap) {
+        try {
+            // ✅ use the fixed helper (auto-detect embedding size)
+            TfliteEmbeddingHelper helper = new TfliteEmbeddingHelper(
+                    this,
+                    "mobilenet_v2_feature_vector.tflite",
+                    224   // input size
+            );
 
-        Map<String, Object> product = new HashMap<>();
-        product.put("productID", productId);
-        product.put("sellerID", sellerID);     // Add sellerID here
-        product.put("productName", name);
-        product.put("productDescription", description);
-        product.put("price", price);
-        product.put("quantity", quantity);
-        product.put("image", base64Image);
-        product.put("status", "pending");
-        product.put("approvedBy", "");  // initially empty
+            float[] embeddingArray = helper.getEmbedding(bitmap);
 
-        ref.child(productId).setValue(product).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                Toast.makeText(AddProductActivity.this, "Product submitted for approval", Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                Toast.makeText(AddProductActivity.this, "Upload failed. Try again.", Toast.LENGTH_SHORT).show();
+            // Convert float[] to List<Double> for Firebase
+            List<Double> embList = new ArrayList<>();
+            for (float f : embeddingArray) embList.add((double) f);
+
+            String sellerID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("products");
+            String productId = ref.push().getKey();
+
+            if (productId == null) {
+                Toast.makeText(this, "Failed to generate product ID", Toast.LENGTH_SHORT).show();
+                return;
             }
-        });
+
+            Map<String, Object> product = new HashMap<>();
+            product.put("productID", productId);
+            product.put("sellerID", sellerID);
+            product.put("productName", name);
+            product.put("productDescription", desc);
+            product.put("price", price);
+            product.put("quantity", qty);
+            product.put("image", base64Image);
+            product.put("status", "pending");
+            product.put("embedding", embList); // ✅ now guaranteed in Firebase
+
+            ref.child(productId).setValue(product).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(this, "Product uploaded with embedding", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(this, "Upload failed", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            helper.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Embedding generation failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
-
-    //get the current UserID
-    private String getCurrentSellerID() {
-        return FirebaseAuth.getInstance().getCurrentUser().getUid();
-    }
-
-
 }

@@ -1,10 +1,535 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F8F9FA"
     tools:context=".DeliveryTracking.DeliveryTrackingActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="30dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="24dp">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:background="#FFFFFF"
+            android:elevation="2dp">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_back"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="4dp"
+                android:clickable="true" />
+
+            <TextView
+                android:id="@+id/tvHeaderTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Delivery Tracking"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#1F2937"
+                android:layout_marginStart="16dp" />
+
+        </LinearLayout>
+
+        <!-- Order Information Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:elevation="1dp"
+            android:padding="20dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Order Information"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#1F2937"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/tvOrderID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Order ID: 12345"
+                android:textSize="16sp"
+                android:textColor="#4B5563"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/tvCustomerID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Customer ID: cust01"
+                android:textSize="16sp"
+                android:textColor="#4B5563"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/tvTotalAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Amount: ₱22,999.00"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#1F2937" />
+
+        </LinearLayout>
+
+        <!-- Delivery Setup Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:elevation="1dp"
+            android:padding="20dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delivery Setup"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#1F2937"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Carrier Selection -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select Delivery Carrier"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#374151"
+                android:layout_marginBottom="8dp" />
+
+            <Spinner
+                android:id="@+id/spinnerCarrier"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="#F3F4F6"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp"
+                android:entries="@array/delivery_carriers" />
+
+            <!-- Tracking Number Input -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tracking Number"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#374151"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/etTrackingNumber"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="#F3F4F6"
+                android:padding="12dp"
+                android:hint="Enter tracking number"
+                android:textSize="16sp"
+                android:textColor="#1F2937"
+                android:textColorHint="#9CA3AF"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Start Delivery Button -->
+            <Button
+                android:id="@+id/btnStartDelivery"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Start Delivery Process"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#2563EB"
+                android:elevation="2dp" />
+
+        </LinearLayout>
+
+        <!-- Delivery Status Card -->
+        <LinearLayout
+            android:id="@+id/layoutDeliveryStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:elevation="1dp"
+            android:padding="20dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delivery Status"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#1F2937"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Current Status -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Current Status:"
+                    android:textSize="16sp"
+                    android:textColor="#4B5563" />
+
+                <TextView
+                    android:id="@+id/tvCurrentStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Processing"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#F59E0B"
+                    android:background="#FEF3C7"
+                    android:padding="8dp"
+                    android:layout_marginStart="8dp" />
+
+            </LinearLayout>
+
+            <!-- Carrier Info -->
+            <TextView
+                android:id="@+id/tvCarrierInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Carrier: J&amp;T Express"
+                android:textSize="16sp"
+                android:textColor="#4B5563"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/tvTrackingInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tracking No: JT123456789"
+                android:textSize="16sp"
+                android:textColor="#4B5563"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Status Update Buttons -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Update Status"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#374151"
+                android:layout_marginBottom="12dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
+
+                <Button
+                    android:id="@+id/btnOutForDelivery"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:text="Out for Delivery"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#F59E0B"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    android:id="@+id/btnDelivered"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:text="Mark as Delivered"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#059669"
+                    android:layout_marginStart="8dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Delivery Timeline Card -->
+        <LinearLayout
+            android:id="@+id/layoutDeliveryTimeline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:elevation="1dp"
+            android:padding="20dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delivery Timeline"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#1F2937"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Timeline Items -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Order Accepted -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <View
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:background="#059669"
+                        android:layout_marginEnd="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Order Accepted"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#1F2937" />
+
+                        <TextView
+                            android:id="@+id/tvOrderAcceptedTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Aug 03, 2025 - 2:30 PM"
+                            android:textSize="14sp"
+                            android:textColor="#6B7280" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Processing -->
+                <LinearLayout
+                    android:id="@+id/timelineProcessing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:background="#F59E0B"
+                        android:layout_marginEnd="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Processing"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#1F2937" />
+
+                        <TextView
+                            android:id="@+id/tvProcessingTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="14sp"
+                            android:textColor="#6B7280" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Out for Delivery -->
+                <LinearLayout
+                    android:id="@+id/timelineOutForDelivery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:background="#2563EB"
+                        android:layout_marginEnd="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Out for Delivery"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#1F2937" />
+
+                        <TextView
+                            android:id="@+id/tvOutForDeliveryTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="14sp"
+                            android:textColor="#6B7280" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Delivered -->
+                <LinearLayout
+                    android:id="@+id/timelineDelivered"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:background="#059669"
+                        android:layout_marginEnd="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Delivered"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#1F2937" />
+
+                        <TextView
+                            android:id="@+id/tvDeliveredTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="14sp"
+                            android:textColor="#6B7280" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Customer Address Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:elevation="1dp"
+            android:padding="20dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delivery Address"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#1F2937"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/tvCustomerName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="John Doe"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#1F2937"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/tvDeliveryAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="123 Main Street, Barangay Centro\nHermosa, Central Luzon 2016\nPhilippines"
+                android:textSize="16sp"
+                android:textColor="#4B5563"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/tvCustomerContact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contact: +63 912 345 6789"
+                android:textSize="16sp"
+                android:textColor="#4B5563" />
+
+        </LinearLayout>
+
+        <!-- Delivery History Card -->
+
+
+    </LinearLayout>
+</ScrollView>

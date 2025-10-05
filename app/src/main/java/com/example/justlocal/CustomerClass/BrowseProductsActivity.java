@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.WindowInsets;
-import android.view.WindowInsetsController;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,7 +18,6 @@ import com.example.justlocal.databinding.ActivityBrowseProductsBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -31,9 +28,6 @@ public class BrowseProductsActivity extends AppCompatActivity {
 
     private ActivityBrowseProductsBinding binding;
     private ProductAdapter productAdapter;
-    private DatabaseReference productRef, usersRef;
-
-    private String productId;
     private List<Product> allProducts = new ArrayList<>();
     private List<Product> filteredProducts = new ArrayList<>();
 
@@ -43,25 +37,25 @@ public class BrowseProductsActivity extends AppCompatActivity {
         binding = ActivityBrowseProductsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Transparent status bar
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
         }
-
-
-
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-        );
-
-
-
 
         setupRecyclerView();
         setupSearchBar();
         fetchProducts();
 
+        // Handle back
         binding.btnBack.setOnClickListener(v -> finish());
+
+        // ✅ If opened from AI scanner, apply detected search query
+        String detectedQuery = getIntent().getStringExtra("searchQuery");
+        if (detectedQuery != null && !detectedQuery.isEmpty()) {
+            binding.etSearch.setText(detectedQuery);
+            filterProducts(detectedQuery);
+        }
+
     }
 
     private void setupRecyclerView() {
@@ -69,9 +63,6 @@ public class BrowseProductsActivity extends AppCompatActivity {
         productAdapter.setOnProductClickListener(new ProductAdapter.OnProductClickListener() {
             @Override
             public void onProductClick(Product product) {
-
-                Toast.makeText(BrowseProductsActivity.this, "Clicked: " + product.getProductName(), Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent(BrowseProductsActivity.this, ViewProductsActivity.class);
                 intent.putExtra("productID", product.getProductID());
                 startActivity(intent);
@@ -79,12 +70,16 @@ public class BrowseProductsActivity extends AppCompatActivity {
 
             @Override
             public void onAddToCartClick(Product product) {
-                Toast.makeText(BrowseProductsActivity.this, "Add to cart: " + product.getProductName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(BrowseProductsActivity.this,
+                        "Added to cart: " + product.getProductName(),
+                        Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFavoriteClick(Product product) {
-                Toast.makeText(BrowseProductsActivity.this, "Favorited: " + product.getProductName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(BrowseProductsActivity.this,
+                        "Favorited: " + product.getProductName(),
+                        Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -98,66 +93,59 @@ public class BrowseProductsActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 filterProducts(s.toString().trim());
             }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
     }
 
     private void fetchProducts() {
         binding.progressBar.setVisibility(View.VISIBLE);
+
         FirebaseDatabase.getInstance().getReference("products")
-                .orderByChild("status")
-                .equalTo("approved")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         allProducts.clear();
                         for (DataSnapshot snap : snapshot.getChildren()) {
                             Product product = snap.getValue(Product.class);
-                            if (product != null) {
+                            if (product != null &&
+                                    product.getStatus() != null &&
+                                    product.getStatus().equalsIgnoreCase("approved")) {
                                 allProducts.add(product);
                             }
                         }
 
                         loadWishlist();
-
-                        filterProducts(binding.etSearch.getText().toString().trim());
-                        binding.progressBar.setVisibility(View.GONE);
                     }
-
-
 
                     @Override
                     public void onCancelled(DatabaseError error) {
-                        Toast.makeText(BrowseProductsActivity.this, "Failed: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BrowseProductsActivity.this,
+                                "Failed: " + error.getMessage(),
+                                Toast.LENGTH_SHORT).show();
                         binding.progressBar.setVisibility(View.GONE);
                     }
                 });
-
-
     }
 
     private void loadWishlist() {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference wishlistRef = FirebaseDatabase.getInstance().getReference("wishlists");
-
-        wishlistRef.orderByChild("customerID").equalTo(userId)
+        FirebaseDatabase.getInstance().getReference("wishlists")
+                .orderByChild("customerID").equalTo(userId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        List<String> favoritedProductIds = new ArrayList<>();
+                        List<String> favoritedIds = new ArrayList<>();
                         for (DataSnapshot snap : snapshot.getChildren()) {
                             String prodId = snap.child("productID").getValue(String.class);
-                            if (prodId != null) favoritedProductIds.add(prodId);
+                            if (prodId != null) favoritedIds.add(prodId);
                         }
 
                         for (Product p : allProducts) {
-                            p.setFavorited(favoritedProductIds.contains(p.getProductID()));
+                            p.setFavorited(favoritedIds.contains(p.getProductID()));
                         }
 
+                        // Filter with current search
                         filterProducts(binding.etSearch.getText().toString().trim());
                         binding.progressBar.setVisibility(View.GONE);
                     }
@@ -167,14 +155,14 @@ public class BrowseProductsActivity extends AppCompatActivity {
                         binding.progressBar.setVisibility(View.GONE);
                     }
                 });
-
     }
 
     private void filterProducts(String keyword) {
         filteredProducts.clear();
 
         for (Product p : allProducts) {
-            if (p.getProductName() != null && p.getProductName().toLowerCase().contains(keyword.toLowerCase())) {
+            if (p.getProductName() != null &&
+                    p.getProductName().toLowerCase().contains(keyword.toLowerCase())) {
                 filteredProducts.add(p);
             }
         }

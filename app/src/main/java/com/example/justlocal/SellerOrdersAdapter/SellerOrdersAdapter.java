@@ -150,7 +150,9 @@ public class SellerOrdersAdapter extends RecyclerView.Adapter<SellerOrdersAdapte
 
         // Set total amount if available
         try {
-            double total = Double.parseDouble(String.valueOf(order.getTotalAmount()));
+            double total = Double.parseDouble(
+                    order.getTotalAmount() != null ? order.getTotalAmount() : "0"
+            );
             holder.binding.tvTotalAmount.setText("₱" + String.format("%.2f", total));
         } catch (NumberFormatException e) {
             holder.binding.tvTotalAmount.setText("₱0.00");

@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Just Local</string>
+    <string-array name="delivery_carriers">
+        <item>Select Carrier</item>
+        <item>J&amp;T Express</item>
+        <item>LBC Express</item>
+        <item>2GO Express</item>
+        <item>Ninja Van</item>
+        <item>GoGo Xpress</item>
+        <item>Flash Express</item>
+        <item>Entrego</item>
+        <item>Philippine Post</item>
+        <item>DHL</item>
+        <item>FedEx</item>
+        <item>UPS</item>
+        <item>Other</item>
+    </string-array>
 </resources>

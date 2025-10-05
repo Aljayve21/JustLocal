@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <!-- Timeline line top -->
+    <View
+        android:id="@+id/viewLineTop"
+        android:layout_width="3dp"
+        android:layout_height="20dp"
+        android:layout_alignStart="@+id/viewTimelineDot"
+        android:layout_alignLeft="@+id/viewTimelineDot"
+        android:layout_above="@+id/viewTimelineDot"
+        android:layout_centerHorizontal="true"
+        android:background="#E5E7EB"
+        android:visibility="visible" />
+
+    <!-- Timeline dot -->
+    <View
+        android:id="@+id/viewTimelineDot"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/timeline_dot_default" />
+
+    <!-- Timeline line bottom -->
+    <View
+        android:id="@+id/viewLineBottom"
+        android:layout_width="3dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/viewTimelineDot"
+        android:layout_alignStart="@+id/viewTimelineDot"
+        android:layout_alignLeft="@+id/viewTimelineDot"
+        android:layout_centerHorizontal="true"
+        android:background="#E5E7EB"
+        android:visibility="visible" />
+
+    <!-- Timeline Content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/viewTimelineDot"
+        android:layout_toRightOf="@id/viewTimelineDot"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="20dp"
+        android:orientation="vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/tvDeliveryStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order Processed"
+            android:textStyle="bold"
+            android:textColor="#1F2937"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvDeliveryDateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2025-07-28 10:30 AM"
+            android:textColor="#6B7280"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tvCarrierInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Carrier: JYT Express"
+            android:textColor="#4B5563"
+            android:textSize="13sp"
+            android:layout_marginTop="2dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</RelativeLayout>
