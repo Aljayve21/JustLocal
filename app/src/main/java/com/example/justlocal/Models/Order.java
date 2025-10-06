@@ -11,12 +11,23 @@ public class Order {
     private String orderDate;
     private String status;
     private String totalAmount;
+    private long orderTimestamp;
 
-    public Order() {}
+    public long getOrderTimestamp() {
+        return orderTimestamp;
+    }
+
+    public void setOrderTimestamp(long orderTimestamp) {
+        this.orderTimestamp = orderTimestamp;
+    }
+
+    public Order() {
+        // Required empty constructor for Firebase
+    }
 
     public Order(String orderID, String customerID, String sellerID, String addressID,
                  String paymentMethod, String deliveryMethod, String trackingNo,
-                 String orderDate, String status, String totalAmount) {
+                 String orderDate, String status, String totalAmount, long orderTimestamp) {
         this.orderID = orderID;
         this.customerID = customerID;
         this.sellerID = sellerID;
@@ -27,6 +38,7 @@ public class Order {
         this.orderDate = orderDate;
         this.status = status;
         this.totalAmount = totalAmount;
+        this.orderTimestamp = orderTimestamp;
     }
 
     public String getOrderID() {

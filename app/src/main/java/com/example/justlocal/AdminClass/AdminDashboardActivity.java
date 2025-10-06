@@ -47,7 +47,10 @@ public class AdminDashboardActivity extends AppCompatActivity {
     private List<DashboardMenuItem> createMenuItems() {
         List<DashboardMenuItem> menuItems = new ArrayList<>();
         menuItems.add(new DashboardMenuItem("User Management", R.drawable.ic_users, "users"));
-        menuItems.add(new DashboardMenuItem("Product Management", R.drawable.ic_products, "products"));
+        menuItems.add(new DashboardMenuItem("Product Management", R.drawable.ic_products, "products", 15));
+        menuItems.add(new DashboardMenuItem("Ordering Management", R.drawable.ic_orders, "orders"));
+        menuItems.add(new DashboardMenuItem("Complaints", R.drawable.ic_complaints, "complaints", 8));
+        menuItems.add(new DashboardMenuItem("Payment Tracking", R.drawable.ic_payments, "payments"));
 
         return menuItems;
     }
@@ -72,7 +75,15 @@ public class AdminDashboardActivity extends AppCompatActivity {
             case "products":
                 intent = new Intent(this, AdminProductManagementActivity.class);
                 break;
-
+            case "orders":
+                intent = new Intent(this, AdminOrderMonitoringActivity.class);
+                break;
+//            case "complaints":
+//                intent = new Intent(this, AdminComplaintsActivity.class);
+//                break;
+            case "payments":
+                intent = new Intent(this, AdminPaymentMonitoringActivity.class);
+                break;
         }
 
         if (intent != null) {

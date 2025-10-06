@@ -139,4 +139,25 @@
     <!-- Red Colors (for future use) -->
     <color name="red_100">#FEE2E2</color>
     <color name="red_700">#DC2626</color>
+
+    <!-- Basic -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- Blues (used in your layout) -->
+    <color name="blue_600">#2563EB</color>   <!-- same as your design #2563EB -->
+    <color name="blue_500">#3B82F6</color>
+
+    <!-- Greys -->
+    <color name="gray_600">#4B5563</color>   <!-- text gray from layouts -->
+    <color name="gray_200">#E5E7EB</color>   <!-- light bg used as button bg -->
+
+    <!-- Other useful colors from your XML examples -->
+    <color name="text_primary">#1F2937</color>
+    <color name="muted">#9CA3AF</color>
+    <color name="amber_500">#F59E0B</color>
+    <color name="red_600">#DC2626</color>
+
+    <color name="yellow_800">#F59E0B</color>
+    <color name="yellow_100">#FEF3C7</color>
 </resources>

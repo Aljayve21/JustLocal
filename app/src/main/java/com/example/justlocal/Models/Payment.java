@@ -9,6 +9,7 @@ public class Payment {
     private String paidAt;
     private String reference;
 
+
     public Payment() {}
 
     public Payment(String paymentID, String orderID, String method, String message,

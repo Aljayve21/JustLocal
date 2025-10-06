@@ -15,4 +15,44 @@
         <item>UPS</item>
         <item>Other</item>
     </string-array>
+
+    <string-array name="sort_options">
+        <item>Sort by: Newest</item>
+        <item>Sort by: Oldest</item>
+        <item>Sort by: Highest Amount</item>
+        <item>Sort by: Lowest Amount</item>
+        <item>Sort by: Seller Name</item>
+        <item>Sort by: Customer Name</item>
+        <item>Sort by: Status</item>
+    </string-array>
+
+    <string-array name="date_range_options">
+        <item>Today</item>
+        <item>This Week</item>
+        <item>This Month</item>
+        <item>Last Month</item>
+        <item>Last 3 Months</item>
+        <item>This Year</item>
+        <item>All Time</item>
+    </string-array>
+
+    <!-- Payment Methods -->
+    <string-array name="payment_methods">
+        <item>All Methods</item>
+        <item>GCash</item>
+        <item>PayMaya</item>
+        <item>Cash on Delivery</item>
+        <item>Bank Transfer</item>
+        <item>Credit Card</item>
+        <item>Debit Card</item>
+    </string-array>
+
+    <!-- Payment Status -->
+    <string-array name="payment_status">
+        <item>All Status</item>
+        <item>Paid</item>
+        <item>Pending</item>
+        <item>Failed</item>
+        <item>Refunded</item>
+    </string-array>
 </resources>

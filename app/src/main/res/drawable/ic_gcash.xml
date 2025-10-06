@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Blue circle background -->
+    <path
+        android:fillColor="#0072CE"
+        android:pathData="M100,0
+                          A100,100 0 1,0 100.01,0Z" />
+
+    <!-- Correct "G" (buntot nasa baba) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M100,60
+                          C122,60 140,78 140,100
+                          C140,122 122,140 100,140
+                          C78,140 60,122 60,100
+                          C60,78 78,60 100,60
+                          C116,60 130,72 135,88
+                          L120,88
+                          C116,77 108,70 100,70
+                          C84,70 70,84 70,100
+                          C70,116 84,130 100,130
+                          C115,130 130,116 130,100
+                          H100
+                          V110
+                          H145
+                          V100
+                          C145,78 124,60 100,60 Z" />
+
+    <!-- Inner wave -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="4"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M150,90
+                          C155,95 155,105 150,110" />
+
+    <!-- Outer wave -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="4"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M160,85
+                          C168,92 168,108 160,115" />
+</vector>
+
+
+

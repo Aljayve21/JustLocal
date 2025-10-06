@@ -210,8 +210,10 @@ public class OrderPaymentActivity extends AppCompatActivity {
                 "Pending",
                 now,
                 "Pending",
-                String.valueOf(total) // use total price instead of product.getPrice()
+                String.valueOf(total),
+                System.currentTimeMillis()
         );
+
 
         OrderItems orderItem = new OrderItems(
                 itemID,
