@@ -65,24 +65,24 @@
 
                     </LinearLayout>
 
-                    <ImageView
-                        android:id="@+id/btnNotifications"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/circle_button_white"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_notifications"
-                        app:tint="#3B82F6"/>
+<!--                    <ImageView-->
+<!--                        android:id="@+id/btnNotifications"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginEnd="8dp"-->
+<!--                        android:background="@drawable/circle_button_white"-->
+<!--                        android:padding="8dp"-->
+<!--                        android:src="@drawable/ic_notifications"-->
+<!--                        app:tint="#3B82F6"/>-->
 
-                    <ImageView
-                        android:id="@+id/btnSettings"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/circle_button_white"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_settings"
-                        app:tint="#3B82F6"/>
+<!--                    <ImageView-->
+<!--                        android:id="@+id/btnSettings"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/circle_button_white"-->
+<!--                        android:padding="8dp"-->
+<!--                        android:src="@drawable/ic_settings"-->
+<!--                        app:tint="#3B82F6"/>-->
 
 
                 </LinearLayout>
@@ -102,7 +102,8 @@
                         android:padding="12dp"
                         android:background="@drawable/rounded_edittext"
                         android:drawableLeft="@drawable/ic_search"
-                        android:drawablePadding="8dp" />
+                        android:drawablePadding="8dp"
+                        android:visibility="gone"/>
 
                     <Button
                         android:layout_width="wrap_content"
@@ -110,7 +111,8 @@
                         android:layout_marginLeft="8dp"
                         android:text="Filter"
                         android:background="@drawable/rounded_button"
-                        android:textColor="@color/white_text" />
+                        android:textColor="@color/white_text"
+                        android:visibility="gone"/>
 
                 </LinearLayout>
 
@@ -210,13 +212,13 @@
                                 android:layout_width="32dp"
                                 android:layout_height="23dp"
                                 android:layout_marginBottom="8dp"
-                                android:src="@drawable/ic_camera"
+                                android:src="@drawable/ic_person"
                                 app:tint="#FFFFFF" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Complaints"
+                                android:text="Profile"
                                 android:textColor="#FFFFFF"
                                 android:textSize="14sp"
                                 android:textStyle="bold"/>
@@ -241,7 +243,8 @@
                         android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardCornerRadius="16dp"
-                        app:cardElevation="2dp">
+                        app:cardElevation="2dp"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -249,7 +252,8 @@
                             android:background="@drawable/card_gradient_purple"
                             android:gravity="center"
                             android:orientation="vertical"
-                            android:padding="16dp">
+                            android:padding="16dp"
+                            >
 
                             <FrameLayout
                                 android:layout_width="wrap_content"
@@ -318,13 +322,13 @@
                                 android:layout_width="32dp"
                                 android:layout_height="23dp"
                                 android:layout_marginBottom="8dp"
-                                android:src="@drawable/ic_orders"
+                                android:src="@drawable/ic_logout"
                                 app:tint="#FFFFFF" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Ticket History"
+                                android:text="Logout"
                                 android:textColor="#FFFFFF"
                                 android:textSize="14sp"
                                 android:textStyle="bold"/>

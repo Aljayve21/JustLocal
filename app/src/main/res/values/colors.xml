@@ -160,4 +160,7 @@
 
     <color name="yellow_800">#F59E0B</color>
     <color name="yellow_100">#FEF3C7</color>
+
+    <color name="green_success">#4CAF50</color>
+    <color name="orange_500">#FF5722</color>
 </resources>

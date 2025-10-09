@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FA"
+    android:paddingTop="30dp"
+    tools:context=".CustomerClass.CustomerAddComplaintMessage">
+
+    <!-- Header -->
+    <LinearLayout
+        android:id="@+id/layoutHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:background="#FFFFFF"
+        android:elevation="4dp"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_arrow_back"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="4dp"
+            android:clickable="true" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Complaint Conversation"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#1F2937" />
+
+            <TextView
+                android:id="@+id/tvComplaintIDHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Complaint #12345"
+                android:textSize="11sp"
+                android:textColor="#6B7280" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvStatusBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Active"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:textColor="#059669"
+            android:background="#D1FAE5"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp" />
+
+        <ImageView
+            android:id="@+id/btnMoreOptions"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_more_vert"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="2dp"
+            android:clickable="true"
+            android:layout_marginStart="8dp" />
+
+    </LinearLayout>
+
+    <!-- Complaint Summary Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardComplaintSummary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layoutHeader"
+        android:layout_margin="12dp"
+        app:cardBackgroundColor="#EFF6FF"
+        app:cardElevation="2dp"
+        app:cardCornerRadius="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_info"
+                    android:tint="#2563EB"
+                    android:layout_marginEnd="6dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Original Complaint"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="#2563EB" />
+
+                <ImageView
+                    android:id="@+id/btnExpandCollapse"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_expand_more"
+                    android:tint="#2563EB"
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvOriginalComplaint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="I haven't received my order yet despite tracking showing delivered."
+                android:textSize="13sp"
+                android:textColor="#1F2937"
+                android:maxLines="2"
+                android:ellipsize="end" />
+
+            <LinearLayout
+                android:id="@+id/layoutExpandedInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginTop="8dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#BFDBFE"
+                    android:layout_marginBottom="8dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="4dp">
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="Order ID:"
+                        android:textSize="11sp"
+                        android:textColor="#6B7280" />
+
+                    <TextView
+                        android:id="@+id/tvOrderIDExpanded"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="#ORD12345"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:textColor="#1F2937" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="Created:"
+                        android:textSize="11sp"
+                        android:textColor="#6B7280" />
+
+                    <TextView
+                        android:id="@+id/tvCreatedDateExpanded"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Aug 04, 2025 - 3:45 PM"
+                        android:textSize="11sp"
+                        android:textColor="#6B7280" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Messages RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvComplaintMessages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/cardComplaintSummary"
+        android:layout_above="@id/layoutTypingIndicator"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:clipToPadding="false"
+        android:scrollbars="vertical" />
+
+    <!-- Empty State -->
+    <LinearLayout
+        android:id="@+id/layoutEmptyMessages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/cardComplaintSummary"
+        android:layout_above="@id/layoutTypingIndicator"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="32dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_empty_chat"
+            android:tint="#9CA3AF"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No conversation yet"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#6B7280"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start the conversation by sending a message"
+            android:textSize="13sp"
+            android:textColor="#9CA3AF"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+    <!-- Typing Indicator -->
+    <LinearLayout
+        android:id="@+id/layoutTypingIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/layoutMessageInput"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:background="#F3F4F6"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_support"
+            android:tint="#2563EB"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Support team is typing..."
+            android:textSize="12sp"
+            android:textStyle="italic"
+            android:textColor="#6B7280" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <!-- Animated typing dots -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <View
+                android:id="@+id/typingDot1"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:layout_marginEnd="3dp"
+                android:background="@drawable/bg_typing_dot" />
+
+            <View
+                android:id="@+id/typingDot2"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:layout_marginEnd="3dp"
+                android:background="@drawable/bg_typing_dot" />
+
+            <View
+                android:id="@+id/typingDot3"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_typing_dot" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Message Input Section -->
+    <LinearLayout
+        android:id="@+id/layoutMessageInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        android:padding="12dp"
+        android:layout_alignParentBottom="true">
+
+        <!-- Character Count -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/tvCharacterCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0/500"
+                android:textSize="11sp"
+                android:textColor="#9CA3AF"
+                android:gravity="end" />
+
+        </LinearLayout>
+
+        <!-- Input Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Message Input Field -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                app:cardBackgroundColor="#F3F4F6"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="24dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
+
+                    <EditText
+                        android:id="@+id/etMessageInput"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:hint="Type your message..."
+                        android:textSize="14sp"
+                        android:textColor="#1F2937"
+                        android:textColorHint="#9CA3AF"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:maxLines="4"
+                        android:maxLength="500"
+                        android:minHeight="40dp"
+                        android:gravity="top|start"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp" />
+
+                    <ImageView
+                        android:id="@+id/btnAttachment"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_attach"
+                        android:tint="#6B7280"
+                        android:padding="4dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Send Button -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:cardBackgroundColor="#2563EB"
+                app:cardElevation="2dp"
+                app:cardCornerRadius="24dp">
+
+                <ImageView
+                    android:id="@+id/btnSendMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_send"
+                    android:tint="#FFFFFF"
+                    android:padding="12dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless" />
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <!-- Quick Replies -->
+        <HorizontalScrollView
+            android:id="@+id/scrollQuickReplies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layout_marginTop="12dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipQuickReply1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="Need update"
+                    android:textSize="12sp"
+                    android:textColor="#6B7280"
+                    app:chipBackgroundColor="#F3F4F6"
+                    app:chipStrokeWidth="0dp"
+                    app:chipCornerRadius="16dp"
+                    android:layout_marginEnd="8dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipQuickReply2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="Still waiting"
+                    android:textSize="12sp"
+                    android:textColor="#6B7280"
+                    app:chipBackgroundColor="#F3F4F6"
+                    app:chipStrokeWidth="0dp"
+                    app:chipCornerRadius="16dp"
+                    android:layout_marginEnd="8dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipQuickReply3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="Thank you"
+                    android:textSize="12sp"
+                    android:textColor="#6B7280"
+                    app:chipBackgroundColor="#F3F4F6"
+                    app:chipStrokeWidth="0dp"
+                    app:chipCornerRadius="16dp" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>

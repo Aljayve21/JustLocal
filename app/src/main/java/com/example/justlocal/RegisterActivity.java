@@ -42,7 +42,22 @@ public class RegisterActivity extends AppCompatActivity {
         String phone = binding.etPhone.getText().toString().trim();
         String password = binding.etPassword.getText().toString().trim();
         String confirmPassword = binding.etConfirmPassword.getText().toString().trim();
-        String role = binding.rgRole.getCheckedRadioButtonId() == R.id.rbCustomer ? "Customer" : "Seller";
+
+
+        //Role selections
+        int selectedId = binding.rgRole.getCheckedRadioButtonId();
+        String role;
+
+        if(selectedId == R.id.rbCustomer) {
+            role = "Customer";
+        } else if (selectedId == R.id.rbSeller) {
+            role = "Seller";
+        } else if (selectedId == R.id.rbCSR){
+            role = "Csr";
+        } else {
+            Toast.makeText(this, "Please select a role", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
 
         if (fullName.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty()) {

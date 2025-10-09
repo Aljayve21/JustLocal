@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.justlocal.Models.Order;
 import com.example.justlocal.Models.Product;
 import com.example.justlocal.R;
 import com.example.justlocal.databinding.ActivityViewProductsBinding;
@@ -30,6 +31,7 @@ public class ViewProductsActivity extends AppCompatActivity {
 
     private ActivityViewProductsBinding binding;
     private Product product;
+    private Order order;
     private int selectedQuantity = 1;
     private boolean isFavorited = false;
 
@@ -90,6 +92,69 @@ public class ViewProductsActivity extends AppCompatActivity {
                 });
     }
 
+    private void reportProduct() {
+        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        if (currentUserId == null) {
+            Toast.makeText(this, "You need to login to report.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // ✅ Simple dialog to enter complaint message
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        builder.setTitle("Report Product");
+
+        final android.widget.EditText input = new android.widget.EditText(this);
+        input.setHint("Describe the issue...");
+        input.setMinLines(3);
+        input.setMaxLines(5);
+        input.setPadding(32, 32, 32, 32);
+        builder.setView(input);
+
+        builder.setPositiveButton("Submit", (dialog, which) -> {
+            String message = input.getText().toString().trim();
+            if (message.isEmpty()) {
+                Toast.makeText(this, "Please enter a message.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Generate unique complaint ID
+            String complaintID = FirebaseDatabase.getInstance().getReference("complaints").push().getKey();
+
+            if (complaintID == null) {
+                Toast.makeText(this, "Failed to create report ID.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Build complaint data
+            HashMap<String, Object> complaintData = new HashMap<>();
+            complaintData.put("complaintID", complaintID);
+            complaintData.put("customerID", currentUserId);
+            complaintData.put("sellerID", product.getSellerID());
+            complaintData.put("productID", product.getProductID());
+            complaintData.put("orderID", order.getOrderID()); // optional if not linked to specific order
+            complaintData.put("message", message);
+            complaintData.put("status", "Open");
+            complaintData.put("repliedBy", "");
+            complaintData.put("createdAt", System.currentTimeMillis());
+
+            FirebaseDatabase.getInstance().getReference("complaints")
+                    .child(complaintID)
+                    .setValue(complaintData)
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(this, "Report submitted successfully.", Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(this, "Failed to submit report: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+
+        });
+
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+
+        builder.show();
+    }
+
+
     private void setupUI() {
         binding.txtProductName.setText(product.getProductName());
         binding.tvProductName.setText(product.getProductName());
@@ -141,6 +206,7 @@ public class ViewProductsActivity extends AppCompatActivity {
         binding.btnBuyNow.setOnClickListener(v -> buyNow());
         binding.btnDecreaseQuantity.setOnClickListener(v -> decreaseQuantity());
         binding.btnIncreaseQuantity.setOnClickListener(v -> increaseQuantity());
+        binding.btnReportProduct.setOnClickListener(v -> reportProduct());
     }
 
     private void loadProductImage(String base64Image) {

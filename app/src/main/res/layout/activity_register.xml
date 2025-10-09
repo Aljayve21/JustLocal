@@ -228,6 +228,16 @@
                         android:textSize="14sp"
                         android:buttonTint="@color/primary_color" />
 
+                    <RadioButton
+                        android:id="@+id/rbCSR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CSR"
+                        android:textColor="@color/secondary_text"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="14sp"
+                        android:buttonTint="@color/primary_color" />
+
                 </RadioGroup>
 
                 <!-- Terms and Conditions -->

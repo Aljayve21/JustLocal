@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:layout_marginBottom="10dp"
+    android:elevation="1dp"
+    android:padding="12dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground">
+
+    <!-- Top Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tvComplaintID"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="CMP-12345"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#1F2937" />
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Open"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="#DC2626"
+            android:background="#FEE2E2"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
+
+    </LinearLayout>
+
+    <!-- Middle Row -->
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Customer message preview..."
+        android:textSize="13sp"
+        android:textColor="#374151"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Bottom Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tvCustomerID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CUST: 9f2a..."
+            android:textSize="11sp"
+            android:textColor="#6B7280" />
+
+        <TextView
+            android:id="@+id/tvOrderID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" • ORD: 12345"
+            android:textSize="11sp"
+            android:textColor="#6B7280" />
+
+        <TextView
+            android:id="@+id/tvProductID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" • PRD: 98765"
+            android:textSize="11sp"
+            android:textColor="#6B7280" />
+
+        <TextView
+            android:id="@+id/tvRepliedBy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" • CSR: none"
+            android:textSize="11sp"
+            android:textColor="#6B7280" />
+
+    </LinearLayout>
+
+</LinearLayout>

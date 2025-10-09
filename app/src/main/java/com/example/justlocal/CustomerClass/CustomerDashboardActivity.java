@@ -10,10 +10,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.justlocal.LoginActivity;
 import com.example.justlocal.Models.Product;
 import com.example.justlocal.Utility.TfliteEmbeddingHelper;
 import com.example.justlocal.databinding.ActivityCustomerDashboardBinding;
@@ -68,6 +70,14 @@ public class CustomerDashboardActivity extends AppCompatActivity {
             } else {
                 openCamera();
             }
+        });
+
+        binding.cardReports.setOnClickListener(v -> {
+            startActivity(new Intent(this, CustomerReportHistoryActivity.class));
+        });
+
+        binding.cardLogout.setOnClickListener(v -> {
+            logout();
         });
     }
 
@@ -161,6 +171,26 @@ public class CustomerDashboardActivity extends AppCompatActivity {
                 });
     }
 
+    private void logout() {
+        new AlertDialog.Builder(this)
+                .setTitle("Logout")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton("Yes", (d, w) -> performLogout())
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void performLogout() {
+        // Clear user session
+        getSharedPreferences("user_session", MODE_PRIVATE)
+                .edit().clear().apply();
+
+        // Return to login
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
 
     private double cosineSimilarity(float[] v1, float[] v2) {
         double dot = 0, norm1 = 0, norm2 = 0;

@@ -164,6 +164,26 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:boxStrokeColor="#3B82F6"
+                app:hintTextColor="#6B7280"
+                app:passwordToggleEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etconPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Password (Leave blank to keep current)"
+                    android:inputType="textPassword"
+                    android:textSize="16sp"
+                    android:textColor="#1F2937" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <!-- Role Spinner -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"

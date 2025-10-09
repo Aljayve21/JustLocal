@@ -55,4 +55,54 @@
         <item>Failed</item>
         <item>Refunded</item>
     </string-array>
+
+    <!-- Ticket Sort Options -->
+    <string-array name="ticket_sort_options">
+        <item>Sort by: Newest</item>
+        <item>Sort by: Oldest</item>
+        <item>Sort by: Priority (High to Low)</item>
+        <item>Sort by: Priority (Low to High)</item>
+        <item>Sort by: Response Time</item>
+        <item>Sort by: Customer Name</item>
+    </string-array>
+
+    <!-- Ticket Categories -->
+    <string-array name="ticket_categories">
+        <item>Order Issue</item>
+        <item>Delivery Problem</item>
+        <item>Payment Issue</item>
+        <item>Product Inquiry</item>
+        <item>Account Problem</item>
+        <item>Technical Support</item>
+        <item>Refund Request</item>
+        <item>General Inquiry</item>
+        <item>Other</item>
+    </string-array>
+
+    <!-- Ticket Status -->
+    <string-array name="ticket_status">
+        <item>Open</item>
+        <item>In Progress</item>
+        <item>Waiting for Customer</item>
+        <item>Resolved</item>
+        <item>Closed</item>
+    </string-array>
+
+    <!-- Ticket Priority -->
+    <string-array name="ticket_priority">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Urgent</item>
+    </string-array>
+
+
+    <string-array name="reports_sort_options">
+        <item>Sort by: Newest</item>
+        <item>Sort by: Oldest</item>
+        <item>Sort by: Priority (High to Low)</item>
+        <item>Sort by: Priority (Low to High)</item>
+        <item>Sort by: Response Time</item>
+        <item>Sort by: Customer Name</item>
+    </string-array>
 </resources>

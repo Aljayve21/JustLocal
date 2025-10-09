@@ -21,6 +21,33 @@
         android:theme="@style/Theme.JustLocal"
         tools:targetApi="31">
         <activity
+            android:name=".AdminClass.AdminComplaintConversationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminClass.AdminComplaintsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CSRClass.CSRRespondTicketActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CSRClass.CSRTicketDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerClass.CustomerAddComplaintMessage"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerClass.CustomerReportDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerClass.CustomerReportHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CSRClass.CSRSupportTicketActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CSRClass.CSRSupportTicketsActivity"
+            android:exported="false" />
+        <activity
             android:name=".CSRClass.CSRDashboardActivity"
             android:exported="false" />
         <activity

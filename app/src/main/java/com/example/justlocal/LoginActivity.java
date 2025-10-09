@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.justlocal.AdminClass.AdminDashboardActivity;
+import com.example.justlocal.CSRClass.CSRDashboardActivity;
 import com.example.justlocal.CustomerClass.CustomerDashboardActivity;
 import com.example.justlocal.SellerClass.SellerDashboardActivity;
 import com.example.justlocal.databinding.ActivityLoginBinding;
@@ -67,9 +68,9 @@ public class LoginActivity extends AppCompatActivity {
                                                 case "customer":
                                                     startActivity(new Intent(LoginActivity.this, CustomerDashboardActivity.class));
                                                     break;
-//                                                case "CSR":
-//                                                    startActivity(new Intent(LoginActivity.this, CSRDashboardActivity.class));
-//                                                    break;
+                                                case "csr":
+                                                    startActivity(new Intent(LoginActivity.this, CSRDashboardActivity.class));
+                                                    break;
                                                 default:
                                                     Toast.makeText(LoginActivity.this, "Unknown role: " + role, Toast.LENGTH_SHORT).show();
                                                     break;

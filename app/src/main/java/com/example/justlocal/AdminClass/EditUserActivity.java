@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -83,10 +84,22 @@ public class EditUserActivity extends AppCompatActivity {
                 return;
             }
 
+            String newPassword = binding.etPassword.getText().toString().trim();
+            String confirmPassword = binding.etconPassword.getText().toString().trim();
+            if(!newPassword.isEmpty() || !confirmPassword.isEmpty()) {
+                binding.etconPassword.setError("Password do not Match!");
+                return;
+            } else {
+                currentUser.setPassword(newPassword);
+            }
+
             currentUser.setFullName(updatedName);
             currentUser.setPhone(binding.etPhone.getText().toString().trim());
-            currentUser.setRole(binding.spinnerRole.getText().toString().trim());
-            currentUser.setStatus(binding.spinnerStatus.getText().toString().trim());
+
+            if(binding.spinnerRole.getVisibility() == View.VISIBLE) {
+                currentUser.setRole(binding.spinnerRole.getText().toString().trim());
+                currentUser.setStatus(binding.spinnerStatus.getText().toString().trim());
+            }
 
             usersRef.setValue(currentUser)
                     .addOnSuccessListener(unused -> Toast.makeText(this, "User updated", Toast.LENGTH_SHORT).show())
@@ -107,6 +120,22 @@ public class EditUserActivity extends AppCompatActivity {
 
                     binding.spinnerRole.setText(currentUser.getRole(), false);
                     binding.spinnerStatus.setText(currentUser.getStatus(), false);
+
+
+                    String role = currentUser.getRole();
+                    if (role != null) {
+                        if (role.equalsIgnoreCase("Seller") ||
+                                role.equalsIgnoreCase("Customer") ||
+                                role.equalsIgnoreCase("csr")) {
+
+                            binding.spinnerRole.setVisibility(View.GONE);
+                            binding.spinnerStatus.setVisibility(View.GONE);
+                        } else {
+                            binding.spinnerRole.setVisibility(View.VISIBLE);
+                            binding.spinnerStatus.setVisibility(View.VISIBLE);
+                        }
+                    }
+
 
                     if (currentUser.getAvatarUrl() != null && !currentUser.getAvatarUrl().isEmpty()) {
                         byte[] decodedBytes = Base64.decode(currentUser.getAvatarUrl(), Base64.DEFAULT);
