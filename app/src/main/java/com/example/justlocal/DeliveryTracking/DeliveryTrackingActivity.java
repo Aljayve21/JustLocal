@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.justlocal.R;
 import com.example.justlocal.databinding.ActivityDeliveryTrackingBinding;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -70,6 +71,8 @@ public class DeliveryTrackingActivity extends AppCompatActivity {
         // Back button
         binding.btnBack.setOnClickListener(v -> finish());
 
+        checkUserRoleAndHideSetup();
+
         // Start Delivery Process
         binding.btnStartDelivery.setOnClickListener(v -> startDelivery());
 
@@ -77,6 +80,27 @@ public class DeliveryTrackingActivity extends AppCompatActivity {
         binding.btnOutForDelivery.setOnClickListener(v -> updateStatus("Out for Delivery"));
         binding.btnDelivered.setOnClickListener(v -> updateStatus("Delivered"));
     }
+
+    private void checkUserRoleAndHideSetup() {
+        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(currentUserId);
+
+        userRef.child("role").get().addOnSuccessListener(snapshot -> {
+            String role = snapshot.getValue(String.class);
+
+            if (role != null && role.equals("Customer")) {
+                // Hide the entire Delivery Setup card
+                binding.layoutDeliverySetup.setVisibility(View.GONE);
+
+                // Hide update buttons if any
+                binding.btnOutForDelivery.setVisibility(View.GONE);
+                binding.btnDelivered.setVisibility(View.GONE);
+            }
+        }).addOnFailureListener(e -> {
+            Toast.makeText(this, "Failed to determine user role", Toast.LENGTH_SHORT).show();
+        });
+    }
+
 
     private void startDelivery() {
         String carrier = binding.spinnerCarrier.getSelectedItem().toString();

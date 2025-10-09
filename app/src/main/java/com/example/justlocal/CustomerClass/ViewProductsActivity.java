@@ -99,7 +99,6 @@ public class ViewProductsActivity extends AppCompatActivity {
             return;
         }
 
-        // ✅ Simple dialog to enter complaint message
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
         builder.setTitle("Report Product");
 
@@ -117,21 +116,21 @@ public class ViewProductsActivity extends AppCompatActivity {
                 return;
             }
 
-            // Generate unique complaint ID
             String complaintID = FirebaseDatabase.getInstance().getReference("complaints").push().getKey();
-
             if (complaintID == null) {
                 Toast.makeText(this, "Failed to create report ID.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Build complaint data
+            // Safe check for order
+            String orderID = (order != null) ? order.getOrderID() : ""; // avoid NPE
+
             HashMap<String, Object> complaintData = new HashMap<>();
             complaintData.put("complaintID", complaintID);
             complaintData.put("customerID", currentUserId);
             complaintData.put("sellerID", product.getSellerID());
             complaintData.put("productID", product.getProductID());
-            complaintData.put("orderID", order.getOrderID()); // optional if not linked to specific order
+            complaintData.put("orderID", orderID);
             complaintData.put("message", message);
             complaintData.put("status", "Open");
             complaintData.put("repliedBy", "");
@@ -140,19 +139,14 @@ public class ViewProductsActivity extends AppCompatActivity {
             FirebaseDatabase.getInstance().getReference("complaints")
                     .child(complaintID)
                     .setValue(complaintData)
-                    .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(this, "Report submitted successfully.", Toast.LENGTH_SHORT).show();
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(this, "Failed to submit report: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    });
-
+                    .addOnSuccessListener(aVoid -> Toast.makeText(this, "Report submitted successfully.", Toast.LENGTH_SHORT).show())
+                    .addOnFailureListener(e -> Toast.makeText(this, "Failed to submit report: " + e.getMessage(), Toast.LENGTH_SHORT).show());
         });
 
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
-
         builder.show();
     }
+
 
 
     private void setupUI() {

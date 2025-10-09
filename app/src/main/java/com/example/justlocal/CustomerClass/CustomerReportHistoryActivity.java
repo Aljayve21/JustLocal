@@ -52,10 +52,10 @@ public class CustomerReportHistoryActivity extends AppCompatActivity {
         // 🔙 Back Button
         binding.btnBack.setOnClickListener(v -> finish());
 
-        // ➕ Create Report Button (Optional)
-        binding.btnCreateReport.setOnClickListener(v -> {
-            // TODO: Open Create Report Activity
-        });
+//        // ➕ Create Report Button (Optional)
+//        binding.btnCreateReport.setOnClickListener(v -> {
+//            // TODO: Open Create Report Activity
+//        });
 
         // ✍️ Search Function
         binding.etSearchReport.addTextChangedListener(new TextWatcher() {
@@ -144,7 +144,7 @@ public class CustomerReportHistoryActivity extends AppCompatActivity {
         binding.tvPendingReports.setText(String.valueOf(pending));
         binding.tvResolvedReports.setText(resolved + " out of " + total);
         int percent = total == 0 ? 0 : (resolved * 100 / total);
-        binding.tvResolvedPercentage.setText(percent + "%");
+
         binding.tvReportCount.setText("All Reports (" + total + ")");
     }
 

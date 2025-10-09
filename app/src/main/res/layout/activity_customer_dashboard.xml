@@ -49,12 +49,14 @@
                         android:paddingTop="20dp">
 
                         <TextView
+                            android:id="@+id/txtGreetings"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:alpha="0.8"
                             android:text="Good Morning!"
+                            android:textStyle="bold"
                             android:textColor="#FFFFFF"
-                            android:textSize="14sp" />
+                            android:textSize="25sp" />
                         
                         <TextView
                             android:id="@+id/customerName"
@@ -62,7 +64,7 @@
                             android:layout_height="wrap_content"
                             android:text="John Doe"
                             android:textColor="#FFFFFF"
-                            android:textSize="16sp" />
+                            android:textSize="28sp" />
 
                         
                     </LinearLayout>
@@ -72,6 +74,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
+                        android:visibility="invisible"
                         android:background="@drawable/circle_button_white"
                         android:padding="8dp"
                         android:src="@drawable/ic_notifications"
@@ -83,6 +86,7 @@
                         android:layout_height="40dp"
                         android:background="@drawable/circle_button_white"
                         android:padding="8dp"
+                        android:visibility="invisible"
                         android:src="@drawable/ic_settings"
                         app:tint="#3B82F6"/>
 
@@ -93,6 +97,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     android:padding="16dp">
 
 
@@ -237,7 +242,7 @@
                         android:orientation="horizontal">
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/cardCart"
+                            android:id="@+id/tvprofile"
                             android:layout_width="0dp"
                             android:layout_height="100dp"
                             android:layout_marginEnd="6dp"
@@ -255,39 +260,21 @@
                                 android:orientation="vertical"
                                 android:padding="16dp">
 
-                                <FrameLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="8dp">
 
                                     <ImageView
                                         android:id="@+id/imgCart"
                                         android:layout_width="40dp"
                                         android:layout_height="40dp"
-                                        android:src="@drawable/ic_cart"
+                                        android:src="@drawable/ic_person"
                                         app:tint="#FFFFFF" />
 
-                                    <TextView
-                                        android:id="@+id/tvCartCount"
-                                        android:layout_width="19dp"
-                                        android:layout_height="19dp"
-                                        android:layout_gravity="top|end"
-                                        android:background="@drawable/circle_red"
-                                        android:gravity="center"
-                                        android:text="0"
-                                        android:textColor="@color/white_text"
-                                        android:textSize="10sp"
-                                        android:textStyle="bold"
-                                        android:visibility="visible"
-                                        android:layout_marginTop="0dp"
-                                        android:layout_marginEnd="0dp"/>
 
-                                </FrameLayout>
+
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="My Cart"
+                                    android:text="Profile"
                                     android:textColor="#FFFFFF"
                                     android:textSize="14sp"
                                     android:textStyle="bold" />

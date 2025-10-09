@@ -22,6 +22,8 @@ tensorflowLiteTaskVision = "0.4.4"
 okhttp = "5.0.0-alpha.16"
 tensorflowLite = "2.17.0"
 textRecognition = "16.0.1"
+picasso = "2.71828"
+itextg = "5.5.10"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -45,6 +47,8 @@ tensorflow-lite-task-vision = { group = "org.tensorflow", name = "tensorflow-lit
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 tensorflow-lite = { group = "org.tensorflow", name = "tensorflow-lite", version.ref = "tensorflowLite" }
 text-recognition = { group = "com.google.mlkit", name = "text-recognition", version.ref = "textRecognition" }
+picasso = { group = "com.squareup.picasso", name = "picasso", version.ref = "picasso" }
+itextg = { group = "com.itextpdf", name = "itextg", version.ref = "itextg" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

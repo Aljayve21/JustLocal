@@ -14,16 +14,22 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.justlocal.Adapters.RecentProductsAdapter;
+import com.example.justlocal.AdminClass.EditUserActivity;
 import com.example.justlocal.LoginActivity;
 import com.example.justlocal.Models.Product;
 import com.example.justlocal.Utility.TfliteEmbeddingHelper;
 import com.example.justlocal.databinding.ActivityCustomerDashboardBinding;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class CustomerDashboardActivity extends AppCompatActivity {
@@ -40,6 +46,10 @@ public class CustomerDashboardActivity extends AppCompatActivity {
         binding = ActivityCustomerDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        setGreetings();
+        loadCustomerName();
+        loadRecentProducts();
+
         try {
             // Load MobileNet model
             embeddingHelper = new TfliteEmbeddingHelper(
@@ -55,6 +65,8 @@ public class CustomerDashboardActivity extends AppCompatActivity {
         binding.cardView1.setOnClickListener(v -> {
             startActivity(new Intent(this, BrowseProductsActivity.class));
         });
+
+
 
         binding.cardOrders.setOnClickListener(v -> {
             String currentUserID = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -79,7 +91,42 @@ public class CustomerDashboardActivity extends AppCompatActivity {
         binding.cardLogout.setOnClickListener(v -> {
             logout();
         });
+
+        binding.tvprofile.setOnClickListener(v -> {
+            openProfile();
+        });
     }
+
+    private void openProfile() {
+        String customerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Intent intent = new Intent(this, EditUserActivity.class);
+        intent.putExtra("userId", customerId);
+        startActivity(intent);
+    }
+    private void loadRecentProducts() {
+        FirebaseDatabase.getInstance().getReference("products")
+                .limitToLast(10) // recent 10 products
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        List<Product> productList = new ArrayList<>();
+                        for (DataSnapshot snap : snapshot.getChildren()) {
+                            Product product = snap.getValue(Product.class);
+                            if (product != null) productList.add(product);
+                        }
+
+                        RecentProductsAdapter adapter = new RecentProductsAdapter(productList);
+                        binding.rvRecentProducts.setAdapter(adapter);
+                        binding.rvRecentProducts.setLayoutManager(
+                                new LinearLayoutManager(CustomerDashboardActivity.this, LinearLayoutManager.HORIZONTAL, false)
+                        );
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {}
+                });
+    }
+
 
     private void openCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -170,6 +217,45 @@ public class CustomerDashboardActivity extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError error) {}
                 });
     }
+
+    private void setGreetings() {
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        String greeting;
+
+        if (hour >= 5 && hour < 12) {
+            greeting = "Good Morning!";
+        } else if (hour >= 12 && hour < 18) {
+            greeting = "Good Afternoon!";
+        } else {
+            greeting = "Good Evening!";
+        }
+
+        binding.txtGreetings.setText(greeting);
+    }
+
+    private void loadCustomerName() {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseDatabase.getInstance().getReference("users")
+                .child(userId)
+                .child("fullName")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String name = snapshot.getValue(String.class);
+                        if (name != null) {
+                            binding.customerName.setText(name);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(CustomerDashboardActivity.this, "Failed to load name", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+
 
     private void logout() {
         new AlertDialog.Builder(this)

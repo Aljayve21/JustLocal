@@ -57,6 +57,8 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.tensorflow.lite)
     implementation(libs.text.recognition)
+    implementation(libs.picasso)
+    implementation(libs.itextg)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

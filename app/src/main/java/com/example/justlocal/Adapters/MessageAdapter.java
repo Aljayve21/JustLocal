@@ -19,31 +19,30 @@ import java.util.Locale;
 
 public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private static final int TYPE_CUSTOMER = 0;
-    private static final int TYPE_SUPPORT = 1;
+    private static final int TYPE_CUSTOMER = 0;  // left
+    private static final int TYPE_SUPPORT = 1;   // right
 
     private Context context;
     private List<Message> messages;
-    private String csrUserId; // UID ng CSR (current user)
+    private String currentUserId;   // logged-in user (CSR/Admin)
+    private boolean isEditable;     // true if user can reply (CSR)
 
-    private boolean isCSRRole;
-
-    public MessageAdapter(Context context, List<Message> messages, String csrUserId, boolean isCSRRole) {
+    public MessageAdapter(Context context, List<Message> messages, String currentUserId, boolean isEditable) {
         this.context = context;
         this.messages = messages;
-        this.csrUserId = csrUserId;
-        this.isCSRRole = isCSRRole;
+        this.currentUserId = currentUserId;
+        this.isEditable = isEditable;
     }
 
     @Override
     public int getItemViewType(int position) {
         Message msg = messages.get(position);
-        // Kung ang senderID ay CSR mismo, layout ay support (right side)
-        if (msg.getSenderID().equals(csrUserId)) {
-            return TYPE_CUSTOMER;
-        } else {
-            // Kung hindi, customer message
+        // If the message sender is the logged-in user → support (right)
+        if (msg.getSenderID().equals(currentUserId)) {
             return TYPE_SUPPORT;
+        } else {
+            // Otherwise, customer (left)
+            return TYPE_CUSTOMER;
         }
     }
 
@@ -65,10 +64,8 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Message msg = messages.get(position);
 
-        boolean isCSRRole = true;
-
         if (holder instanceof SupportViewHolder) {
-            ((SupportViewHolder) holder).bind(msg, isCSRRole);
+            ((SupportViewHolder) holder).bind(msg, isEditable);
         } else if (holder instanceof CustomerViewHolder) {
             ((CustomerViewHolder) holder).bind(msg);
         }
@@ -91,15 +88,16 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             tvSenderName = itemView.findViewById(R.id.tvSenderName);
         }
 
-        void bind(Message msg, boolean isCSRRole) {
+        void bind(Message msg, boolean isEditable) {
             tvSupportMessage.setText(msg.getContent());
             tvSupportMessageTime.setText(formatTime(msg.getTimestamp()));
 
-            if(isCSRRole) {
-                tvSenderName.setText("Customer");
-            } else {
-                tvSenderName.setText("Support Team");
+            if (isEditable) {
+                tvSenderName.setText("Support Team"); // show CSR/Admin name if needed
                 tvSenderName.setVisibility(View.VISIBLE);
+            } else {
+                tvSenderName.setText(""); // hide name for view-only users
+                tvSenderName.setVisibility(View.GONE);
             }
         }
     }

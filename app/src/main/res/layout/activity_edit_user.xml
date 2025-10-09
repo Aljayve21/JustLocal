@@ -186,6 +186,7 @@
 
             <!-- Role Spinner -->
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/roleInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -207,6 +208,7 @@
 
             <!-- Status Spinner -->
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/statusInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"

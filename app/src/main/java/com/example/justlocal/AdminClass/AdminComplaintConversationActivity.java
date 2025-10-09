@@ -16,6 +16,8 @@ import com.example.justlocal.Models.Complaint;
 import com.example.justlocal.Models.Message;
 import com.example.justlocal.R;
 import com.example.justlocal.databinding.ActivityAdminComplaintConversationBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +31,7 @@ public class AdminComplaintConversationActivity extends AppCompatActivity {
 
     private ActivityAdminComplaintConversationBinding binding;
     private String complaintID;
-    private DatabaseReference complaintRef;
+    private DatabaseReference complaintRef, messagesRef;
     private List<Message> messageList;
     private MessageAdapter messageAdapter;
 
@@ -39,7 +41,6 @@ public class AdminComplaintConversationActivity extends AppCompatActivity {
         binding = ActivityAdminComplaintConversationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Get complaintID from intent
         complaintID = getIntent().getStringExtra("complaintID");
         if (complaintID == null) {
             Toast.makeText(this, "Complaint ID not provided", Toast.LENGTH_SHORT).show();
@@ -47,41 +48,45 @@ public class AdminComplaintConversationActivity extends AppCompatActivity {
             return;
         }
 
-        // Setup RecyclerView
-        messageList = new ArrayList<>();
-        messageAdapter = new MessageAdapter(messageList, this);
-        binding.rvMessages.setLayoutManager(new LinearLayoutManager(this));
-        binding.rvMessages.setAdapter(messageAdapter);
-
+        setupRecyclerView();
         binding.btnBack.setOnClickListener(v -> finish());
 
-        // Load complaint and messages
+        // load complaint header info
         loadComplaintDetails();
+
+        // listen for messages under "messages" node
+        loadMessages();
+    }
+
+    private void setupRecyclerView() {
+        messageList = new ArrayList<>();
+        String adminUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String role = "admin"; // view-only
+        boolean isEditable = role.equals("csr");
+        messageAdapter = new MessageAdapter(this, messageList, adminUserId, isEditable);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setStackFromEnd(true);
+        binding.rvMessages.setLayoutManager(layoutManager);
+        binding.rvMessages.setAdapter(messageAdapter);
     }
 
     private void loadComplaintDetails() {
-        complaintRef = FirebaseDatabase.getInstance().getReference("complaints").child(complaintID);
-        complaintRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        complaintRef = FirebaseDatabase.getInstance()
+                .getReference("complaints")
+                .child(complaintID);
+
+        complaintRef.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Complaint complaint = snapshot.getValue(Complaint.class);
                 if (complaint != null) {
-                    // Populate header and meta info
                     binding.tvHeaderTitle.setText("Complaint #" + complaint.getComplaintID());
                     binding.tvHeaderStatus.setText(complaint.getStatus());
-
                     binding.tvCustomerID.setText("Customer: " + complaint.getCustomerID());
                     binding.tvOrderID.setText("Order: " + complaint.getOrderID());
                     binding.tvProductID.setText("Product: " + complaint.getProductID());
-
                     binding.tvCreatedAt.setText("Created: " + complaint.getDateCreated());
-
-                    // Load messages if exist
-                    if (complaint.getMessage() != null) {
-                        messageList.clear();
-                        messageList.addAll(complaint.getMessage());
-                        messageAdapter.notifyDataSetChanged();
-                    }
                 } else {
                     Toast.makeText(AdminComplaintConversationActivity.this, "Complaint not found", Toast.LENGTH_SHORT).show();
                     finish();
@@ -90,8 +95,33 @@ public class AdminComplaintConversationActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(AdminComplaintConversationActivity.this, "Failed to load complaint: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminComplaintConversationActivity.this,
+                        "Failed to load complaint: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void loadMessages() {
+        messagesRef = FirebaseDatabase.getInstance().getReference("messages");
+
+        messagesRef.orderByChild("complaintID").equalTo(complaintID)
+                .addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot snapshot, String previousChildName) {
+                        Message message = snapshot.getValue(Message.class);
+                        if (message != null) {
+                            messageList.add(message);
+                            messageAdapter.notifyItemInserted(messageList.size() - 1);
+                            binding.rvMessages.scrollToPosition(messageList.size() - 1);
+                        }
+                    }
+
+                    @Override public void onChildChanged(@NonNull DataSnapshot snapshot, String previousChildName) {}
+                    @Override public void onChildRemoved(@NonNull DataSnapshot snapshot) {}
+                    @Override public void onChildMoved(@NonNull DataSnapshot snapshot, String previousChildName) {}
+                    @Override public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(AdminComplaintConversationActivity.this, "Failed to load messages", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

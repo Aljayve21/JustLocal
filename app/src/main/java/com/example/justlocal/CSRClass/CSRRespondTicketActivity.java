@@ -40,9 +40,9 @@ public class CSRRespondTicketActivity extends AppCompatActivity {
 
     private ActivityCsrRespondTicketBinding binding;
     private DatabaseReference complaintsRef, messagesRef;
-    private String complaintID, csrUserID;
+    private String complaintID, csrUserID, currentUserId;
 
-    private boolean isCSRRole;
+
 
     private MessageAdapter messageAdapter;
     private ArrayList<Message> messageList = new ArrayList<>();
@@ -137,6 +137,7 @@ public class CSRRespondTicketActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
+        boolean isCSRRole = true;
         messageAdapter = new MessageAdapter(this, messageList, csrUserID, isCSRRole);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setStackFromEnd(true);

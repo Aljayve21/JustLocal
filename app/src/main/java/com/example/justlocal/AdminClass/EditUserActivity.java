@@ -126,15 +126,23 @@ public class EditUserActivity extends AppCompatActivity {
                     if (role != null) {
                         if (role.equalsIgnoreCase("Seller") ||
                                 role.equalsIgnoreCase("Customer") ||
-                                role.equalsIgnoreCase("csr")) {
+                                role.equalsIgnoreCase("CSR")) {
 
+                            // Hide both spinner and its wrapper
                             binding.spinnerRole.setVisibility(View.GONE);
                             binding.spinnerStatus.setVisibility(View.GONE);
+                            binding.roleInputLayout.setVisibility(View.GONE);  // <- wrapper ng role
+                            binding.statusInputLayout.setVisibility(View.GONE); // <- wrapper ng status
+
                         } else {
                             binding.spinnerRole.setVisibility(View.VISIBLE);
                             binding.spinnerStatus.setVisibility(View.VISIBLE);
+                            binding.roleInputLayout.setVisibility(View.VISIBLE);
+                            binding.statusInputLayout.setVisibility(View.VISIBLE);
                         }
                     }
+
+
 
 
                     if (currentUser.getAvatarUrl() != null && !currentUser.getAvatarUrl().isEmpty()) {

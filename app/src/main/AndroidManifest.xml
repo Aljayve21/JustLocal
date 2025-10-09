@@ -21,6 +21,9 @@
         android:theme="@style/Theme.JustLocal"
         tools:targetApi="31">
         <activity
+            android:name=".AdminClass.AdminGenerateReportActivity"
+            android:exported="false" />
+        <activity
             android:name=".AdminClass.AdminComplaintConversationActivity"
             android:exported="false" />
         <activity

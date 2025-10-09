@@ -91,7 +91,8 @@ public class AdminDashboardActivity extends AppCompatActivity {
         });
 
         binding.btnGenerateReport.setOnClickListener(v -> {
-            // Generate report logic
+            Intent intent = new Intent(AdminDashboardActivity.this, AdminGenerateReportActivity.class);
+            startActivity(intent);
         });
     }
 

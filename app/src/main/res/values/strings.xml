@@ -105,4 +105,30 @@
         <item>Sort by: Response Time</item>
         <item>Sort by: Customer Name</item>
     </string-array>
+
+    <!-- Report types for spinnerReportType -->
+    <string-array name="admin_report_types">
+        <item>Orders</item>
+        <item>Revenue</item>
+        <item>Complaints</item>
+        <item>Customers</item>
+        <item>Products</item>
+    </string-array>
+
+    <!-- Optional: sort options if you add a list preview later -->
+    <string-array name="admin_report_sort_options">
+        <item>Newest first</item>
+        <item>Oldest first</item>
+        <item>Highest value</item>
+        <item>Lowest value</item>
+    </string-array>
+
+    <!-- Optional: quick preset ranges (if needed for a secondary spinner) -->
+    <string-array name="admin_quick_ranges">
+        <item>Today</item>
+        <item>This Week</item>
+        <item>This Month</item>
+        <item>Last 30 Days</item>
+        <item>Custom</item>
+    </string-array>
 </resources>

@@ -1,5 +1,9 @@
 package com.example.justlocal.Models;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class Order {
     private String orderID;
     private String customerID;
@@ -14,8 +18,16 @@ public class Order {
     private long orderTimestamp;
 
     public long getOrderTimestamp() {
-        return orderTimestamp;
+        if (orderDate == null) return 0;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            Date date = sdf.parse(orderDate);
+            return date.getTime();
+        } catch (Exception e) {
+            return 0;
+        }
     }
+
 
     public void setOrderTimestamp(long orderTimestamp) {
         this.orderTimestamp = orderTimestamp;
@@ -100,6 +112,8 @@ public class Order {
     public String getOrderDate() {
         return orderDate;
     }
+
+
 
     public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
