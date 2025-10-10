@@ -46,6 +46,7 @@
 
 
                         <TextView
+                            android:id="@+id/txtGreetings"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:alpha="0.8"
@@ -70,6 +71,7 @@
                         android:layout_marginEnd="8dp"
                         android:background="@drawable/circle_button_white"
                         android:padding="8dp"
+                        android:visibility="gone"
                         android:src="@drawable/ic_notifications"
                         app:tint="#3B82F6" />
 
@@ -79,6 +81,7 @@
                         android:layout_height="40dp"
                         android:background="@drawable/circle_button_white"
                         android:padding="8dp"
+                        android:visibility="gone"
                         android:src="@drawable/ic_settings"
                         app:tint="#3B82F6" />
 
@@ -178,6 +181,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp" />
             </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"

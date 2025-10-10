@@ -33,7 +33,13 @@ public class RegisterActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance().getReference().child("users");
 
         binding.btnRegister.setOnClickListener(v -> registerUser());
+        binding.btnSignIn.setOnClickListener(v -> backtologin());
 
+    }
+
+    private void backtologin() {
+        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 
     private void registerUser() {
