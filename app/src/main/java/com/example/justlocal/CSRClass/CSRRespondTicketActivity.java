@@ -22,6 +22,7 @@ import com.example.justlocal.Adapters.ComplaintMessageAdapter;
 import com.example.justlocal.Adapters.MessageAdapter;
 import com.example.justlocal.Models.Complaint;
 import com.example.justlocal.Models.Message;
+import com.example.justlocal.Models.Notification;
 import com.example.justlocal.R;
 import com.example.justlocal.databinding.ActivityCsrRespondTicketBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,7 +41,7 @@ public class CSRRespondTicketActivity extends AppCompatActivity {
 
     private ActivityCsrRespondTicketBinding binding;
     private DatabaseReference complaintsRef, messagesRef;
-    private String complaintID, csrUserID, currentUserId;
+    private String complaintID, csrUserID, customerID;
 
 
 
@@ -58,9 +59,6 @@ public class CSRRespondTicketActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
         }
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-        );
 
         csrUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         complaintID = getIntent().getStringExtra("complaintID");
@@ -93,6 +91,10 @@ public class CSRRespondTicketActivity extends AppCompatActivity {
                                     // Disable input at send button
                                     binding.etResponseInput.setEnabled(false);
                                     binding.btnSendResponse.setEnabled(false);
+
+                                    sendNotification("Complaint Resolved",
+                                            "Your complaint #" + complaintID + " has been marked as resolved.",
+                                            "complaint");
                                 })
                                 .addOnFailureListener(e -> {
                                     Toast.makeText(this, "Failed to update status", Toast.LENGTH_SHORT).show();
@@ -114,6 +116,10 @@ public class CSRRespondTicketActivity extends AppCompatActivity {
                         binding.tvStatusBadge.setText("Escalated");
                         binding.tvStatusBadge.setTextColor(Color.parseColor("#DC2626"));
                         binding.tvStatusBadge.setBackgroundColor(Color.parseColor("#FEE2E2"));
+
+                        sendNotification("Complaint Escalated",
+                                "Your complaint #" + complaintID + " has been escalated for further review.",
+                                "complaint");
                     });
         });
 
@@ -149,6 +155,7 @@ public class CSRRespondTicketActivity extends AppCompatActivity {
         complaintsRef.child(complaintID).get().addOnSuccessListener(snapshot -> {
             Complaint complaint = snapshot.getValue(Complaint.class);
             if (complaint != null) {
+                customerID = complaint.getCustomerID();
                 binding.tvTicketIDHeader.setText("Complaint #" + complaint.getComplaintID());
                 binding.tvCustomerNameHeader.setText(complaint.getMessage());
             }
@@ -226,6 +233,10 @@ public class CSRRespondTicketActivity extends AppCompatActivity {
 
                         complaintsRef.child(complaintID).child("repliedBy").setValue(csrUserID)
                                 .addOnFailureListener(e -> Log.e(TAG, "Failed to update repliedBy", e));
+
+                        sendNotification("New Reply",
+                                "A CSR agent has replied to your complaint #" + complaintID,
+                                "complaint");
                     })
                     .addOnFailureListener(e -> {
                         Toast.makeText(this, "Failed to send message", Toast.LENGTH_SHORT).show();
@@ -235,5 +246,22 @@ public class CSRRespondTicketActivity extends AppCompatActivity {
 
 
         });
+    }
+
+    private void sendNotification(String title, String message, String type) {
+        if (customerID == null) return;
+        DatabaseReference notifRef = FirebaseDatabase.getInstance().getReference("notifications").child(customerID);
+        String notifId = notifRef.push().getKey();
+        if (notifId == null) return;
+
+        Notification notification = new Notification(
+                notifId,
+                title,
+                message,
+                System.currentTimeMillis(),
+                type
+        );
+
+        notifRef.child(notifId).setValue(notification);
     }
 }

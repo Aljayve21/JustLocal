@@ -35,10 +35,7 @@ import java.util.List;
 public class CustomerDashboardActivity extends AppCompatActivity {
 
     private ActivityCustomerDashboardBinding binding;
-    private static final int CAMERA_REQUEST_CODE = 1001;
-    private static final int CAMERA_PERMISSION_CODE = 2001;
-
-    private TfliteEmbeddingHelper embeddingHelper;
+    private static final int NOTIFICATION_PERMISSION_CODE = 3001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,21 +43,12 @@ public class CustomerDashboardActivity extends AppCompatActivity {
         binding = ActivityCustomerDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        checkNotificationPermission();
         setGreetings();
         loadCustomerName();
         loadRecentProducts();
-
-        try {
-            // Load MobileNet model
-            embeddingHelper = new TfliteEmbeddingHelper(
-                    this,
-                    "mobilenet_v2_feature_vector.tflite",
-                    224
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Failed to load model", Toast.LENGTH_LONG).show();
-        }
+        updateFCMToken();
+        listenForUnreadNotifications();
 
         binding.cardView1.setOnClickListener(v -> {
             startActivity(new Intent(this, BrowseProductsActivity.class));
@@ -76,12 +64,7 @@ public class CustomerDashboardActivity extends AppCompatActivity {
         });
 
         binding.cardScanProduct.setOnClickListener(v -> {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
-            } else {
-                openCamera();
-            }
+            startActivity(new Intent(this, ProductAiScannerActivity.class));
         });
 
         binding.cardReports.setOnClickListener(v -> {
@@ -95,6 +78,72 @@ public class CustomerDashboardActivity extends AppCompatActivity {
         binding.tvprofile.setOnClickListener(v -> {
             openProfile();
         });
+
+        binding.btnSettings.setOnClickListener(v -> {
+            startActivity(new Intent(this, com.example.justlocal.SettingsActivity.class));
+        });
+
+        binding.btnNotifications.setOnClickListener(v -> {
+            startActivity(new Intent(this, NotificationHistoryActivity.class));
+        });
+    }
+
+    private void updateFCMToken() {
+        com.google.firebase.messaging.FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        return;
+                    }
+                    String token = task.getResult();
+                    String userId = FirebaseAuth.getInstance().getUid();
+                    if (userId != null) {
+                        FirebaseDatabase.getInstance().getReference("users")
+                                .child(userId)
+                                .child("fcmToken")
+                                .setValue(token);
+                    }
+                });
+    }
+
+    private void listenForUnreadNotifications() {
+        String userId = FirebaseAuth.getInstance().getUid();
+        if (userId == null) return;
+
+        FirebaseDatabase.getInstance().getReference("notifications")
+                .child(userId)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        boolean hasUnread = false;
+                        for (DataSnapshot snap : snapshot.getChildren()) {
+                            Boolean isRead = snap.child("read").getValue(Boolean.class);
+                            if (isRead != null && !isRead) {
+                                hasUnread = true;
+                                break;
+                            }
+                        }
+                        
+                        if (hasUnread) {
+                            binding.btnNotifications.setColorFilter(android.graphics.Color.RED);
+                        } else {
+                            binding.btnNotifications.setColorFilter(android.graphics.Color.parseColor("#3B82F6"));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {}
+                });
+    }
+
+    private void checkNotificationPermission() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.POST_NOTIFICATIONS},
+                        NOTIFICATION_PERMISSION_CODE);
+            }
+        }
     }
 
     private void openProfile() {
@@ -103,6 +152,7 @@ public class CustomerDashboardActivity extends AppCompatActivity {
         intent.putExtra("userId", customerId);
         startActivity(intent);
     }
+
     private void loadRecentProducts() {
         FirebaseDatabase.getInstance().getReference("products")
                 .limitToLast(10) // recent 10 products
@@ -120,97 +170,6 @@ public class CustomerDashboardActivity extends AppCompatActivity {
                         binding.rvRecentProducts.setLayoutManager(
                                 new LinearLayoutManager(CustomerDashboardActivity.this, LinearLayoutManager.HORIZONTAL, false)
                         );
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {}
-                });
-    }
-
-
-    private void openCamera() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, CAMERA_REQUEST_CODE);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == CAMERA_PERMISSION_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                openCamera();
-            } else {
-                Toast.makeText(this, "Camera permission is required", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            if (photo != null) {
-                matchProductByImage(photo);
-            }
-        }
-    }
-
-    private void matchProductByImage(Bitmap bitmap) {
-        if (embeddingHelper == null) {
-            Toast.makeText(this, "Model not loaded", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        float[] queryEmbedding = embeddingHelper.getEmbedding(bitmap);
-        if (queryEmbedding == null) {
-            Toast.makeText(this, "Failed to extract features", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        FirebaseDatabase.getInstance().getReference("products")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        double bestScore = -1;
-                        Product bestMatch = null;
-
-                        for (DataSnapshot snap : snapshot.getChildren()) {
-                            Product product = snap.getValue(Product.class);
-                            if (product == null) continue;
-
-                            List<Double> embList = product.getEmbedding();
-                            if (embList == null || embList.isEmpty()) continue;
-
-                            float[] dbEmbedding = new float[embList.size()];
-                            for (int i = 0; i < embList.size(); i++) {
-                                dbEmbedding[i] = embList.get(i).floatValue();
-                            }
-
-                            double score = cosineSimilarity(queryEmbedding, dbEmbedding);
-
-                            // 🔍 Debug log
-                            android.util.Log.d("SIMILARITY_CHECK",
-                                    "Product: " + product.getProductName() + " | Score: " + score);
-
-                            if (score > bestScore) {
-                                bestScore = score;
-                                bestMatch = product;
-                            }
-                        }
-
-                        // Lower threshold muna for testing
-                        if (bestMatch != null && bestScore > 0.15) {
-                            Toast.makeText(CustomerDashboardActivity.this,
-                                    "Searching images....", Toast.LENGTH_LONG).show();
-
-                            Intent intent = new Intent(CustomerDashboardActivity.this, BrowseProductsActivity.class);
-                            intent.putExtra("searchQuery", bestMatch.getProductName());
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(CustomerDashboardActivity.this, "No similar product found", Toast.LENGTH_SHORT).show();
-                        }
                     }
 
                     @Override
@@ -278,21 +237,8 @@ public class CustomerDashboardActivity extends AppCompatActivity {
         finish();
     }
 
-    private double cosineSimilarity(float[] v1, float[] v2) {
-        double dot = 0, norm1 = 0, norm2 = 0;
-        for (int i = 0; i < v1.length; i++) {
-            dot += v1[i] * v2[i];
-            norm1 += v1[i] * v1[i];
-            norm2 += v2[i] * v2[i];
-        }
-        return dot / (Math.sqrt(norm1) * Math.sqrt(norm2));
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (embeddingHelper != null) {
-            embeddingHelper.close();
-        }
     }
 }

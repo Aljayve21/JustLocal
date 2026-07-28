@@ -33,21 +33,21 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="My Reports"
+            android:text="@string/label_my_reports"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#1F2937"
             android:layout_marginStart="16dp" />
 
-<!--        <ImageView-->
-<!--            android:id="@+id/btnCreateReport"-->
-<!--            android:layout_width="24dp"-->
-<!--            android:layout_height="24dp"-->
-<!--            android:src="@drawable/ic_add"-->
-<!--            android:background="?attr/selectableItemBackgroundBorderless"-->
-<!--            android:padding="2dp"-->
-<!--            android:clickable="true"-->
-<!--            android:contentDescription="Create new report" />-->
+        <ImageView
+            android:id="@+id/btnCreateReport"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_add"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="2dp"
+            android:clickable="true"
+            android:contentDescription="@string/desc_create_report" />
 
     </LinearLayout>
 
@@ -91,7 +91,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Total Reports"
+                        android:text="@string/label_total_reports"
                         android:textSize="12sp"
                         android:textColor="#6B7280"
                         android:layout_marginBottom="4dp" />
@@ -100,7 +100,7 @@
                         android:id="@+id/tvTotalReports"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="12"
+                        tools:text="12"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         android:textColor="#1F2937" />
@@ -128,7 +128,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Pending"
+                        android:text="@string/label_pending"
                         android:textSize="12sp"
                         android:textColor="#6B7280"
                         android:layout_marginBottom="4dp" />
@@ -137,7 +137,7 @@
                         android:id="@+id/tvPendingReports"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="3"
+                        tools:text="3"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         android:textColor="#F59E0B" />
@@ -173,7 +173,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Resolved Reports"
+                        android:text="@string/label_resolved_reports"
                         android:textSize="14sp"
                         android:textColor="#6B7280"
                         android:layout_marginBottom="2dp" />
@@ -182,7 +182,7 @@
                         android:id="@+id/tvResolvedReports"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="9 out of 12"
+                        tools:text="9 out of 12"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="#059669" />
@@ -236,7 +236,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:hint="Search reports..."
+                android:hint="@string/hint_search_reports"
                 android:textSize="14sp"
                 android:textColor="#1F2937"
                 android:textColorHint="#9CA3AF"
@@ -260,7 +260,7 @@
                     android:id="@+id/btnFilterAllReports"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
-                    android:text="All"
+                    android:text="@string/label_all"
                     android:textSize="14sp"
                     android:textColor="#FFFFFF"
                     android:backgroundTint="#2563EB"
@@ -273,7 +273,7 @@
                     android:id="@+id/btnFilterPending"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
-                    android:text="Pending"
+                    android:text="@string/label_pending"
                     android:textSize="14sp"
                     android:textColor="#6B7280"
                     android:backgroundTint="#E5E7EB"
@@ -286,7 +286,7 @@
                     android:id="@+id/btnFilterInReview"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
-                    android:text="In Review"
+                    android:text="@string/label_in_review"
                     android:textSize="14sp"
                     android:textColor="#6B7280"
                     android:backgroundTint="#E5E7EB"
@@ -299,7 +299,7 @@
                     android:id="@+id/btnFilterResolved"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
-                    android:text="Resolved"
+                    android:text="@string/label_resolved"
                     android:textSize="14sp"
                     android:textColor="#6B7280"
                     android:backgroundTint="#E5E7EB"
@@ -326,7 +326,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="All Reports (12)"
+            tools:text="All Reports (12)"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="#1F2937" />
@@ -374,7 +374,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No Reports Yet"
+            android:text="@string/msg_no_reports_yet"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#1F2937"
@@ -383,7 +383,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="You haven't submitted any reports.\nCreate your first report to get started."
+            android:text="@string/msg_empty_reports_desc"
             android:textSize="14sp"
             android:textColor="#6B7280"
             android:textAlignment="center"
@@ -393,7 +393,7 @@
             android:id="@+id/btnCreateFirstReport"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:text="Create Report"
+            android:text="@string/label_create_report"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"

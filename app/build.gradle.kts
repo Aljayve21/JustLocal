@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.firebase.storage)
     implementation(libs.google.services)
     implementation(libs.firebase.database)
+    implementation("com.google.firebase:firebase-messaging:25.1.1")
     implementation(libs.tensorflow.lite.support)
     implementation(libs.tensorflow.lite.metadata)
 //    implementation(libs.tensorflow.lite.task.vision)
@@ -59,6 +60,15 @@ dependencies {
     implementation(libs.text.recognition)
     implementation(libs.picasso)
     implementation(libs.itextg)
+
+    // CameraX
+    implementation(libs.camera.core)
+    implementation(libs.camera.camera2)
+    implementation(libs.camera.lifecycle)
+    implementation(libs.camera.view)
+    implementation(libs.camera.extensions)
+    implementation(libs.guava)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

@@ -40,9 +40,6 @@ public class CustomerReportHistoryActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
         }
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-        );
 
         setupUI();
         loadComplaintsFromFirebase();
@@ -52,10 +49,14 @@ public class CustomerReportHistoryActivity extends AppCompatActivity {
         // 🔙 Back Button
         binding.btnBack.setOnClickListener(v -> finish());
 
-//        // ➕ Create Report Button (Optional)
-//        binding.btnCreateReport.setOnClickListener(v -> {
-//            // TODO: Open Create Report Activity
-//        });
+        // ➕ Create Report Button (Optional)
+        binding.btnCreateReport.setOnClickListener(v -> {
+            startActivity(new android.content.Intent(this, CustomerCreateComplaintActivity.class));
+        });
+
+        binding.btnCreateFirstReport.setOnClickListener(v -> {
+            startActivity(new android.content.Intent(this, CustomerCreateComplaintActivity.class));
+        });
 
         // ✍️ Search Function
         binding.etSearchReport.addTextChangedListener(new TextWatcher() {

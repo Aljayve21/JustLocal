@@ -45,9 +45,6 @@ public class ViewProductsActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
         }
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-        );
 
         // Get product ID from Intent
         String productID = getIntent().getStringExtra("productID");
@@ -219,11 +216,30 @@ public class ViewProductsActivity extends AppCompatActivity {
     }
 
     private void toggleFavorite() {
+        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        if (currentUserId == null) {
+            Toast.makeText(this, "Please login to use wishlist", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         isFavorited = !isFavorited;
-        product.setFavorited(isFavorited);
         updateFavoriteButton();
-        Toast.makeText(this, isFavorited ? "Added to favorites" : "Removed from favorites", Toast.LENGTH_SHORT).show();
-        // TODO: Save to Firebase wishlist if needed
+
+        DatabaseReference wishlistRef = FirebaseDatabase.getInstance().getReference("wishlist")
+                .child(currentUserId)
+                .child(product.getProductID());
+
+        if (isFavorited) {
+            HashMap<String, Object> wishlistData = new HashMap<>();
+            wishlistData.put("productID", product.getProductID());
+            wishlistData.put("addedAt", System.currentTimeMillis());
+
+            wishlistRef.setValue(wishlistData)
+                    .addOnSuccessListener(aVoid -> Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show());
+        } else {
+            wishlistRef.removeValue()
+                    .addOnSuccessListener(aVoid -> Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show());
+        }
     }
 
     private void updateFavoriteButton() {

@@ -48,6 +48,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         setupRecyclerView();
         setGreetings();
         loadAdminName();
+        updateFCMToken();
 
         // Initial load of dashboard counters
         loadDashboardCounters();
@@ -97,6 +98,23 @@ public class AdminDashboardActivity extends AppCompatActivity {
                 });
     }
 
+    private void updateFCMToken() {
+        com.google.firebase.messaging.FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        return;
+                    }
+                    String token = task.getResult();
+                    String userId = FirebaseAuth.getInstance().getUid();
+                    if (userId != null) {
+                        FirebaseDatabase.getInstance().getReference("users")
+                                .child(userId)
+                                .child("fcmToken")
+                                .setValue(token);
+                    }
+                });
+    }
+
     private void setupRecyclerView() {
         List<DashboardMenuItem> menuItems = createMenuItems();
         dashboardMenuAdapter = new DashboardMenuAdapter(menuItems, this::onMenuItemClick);
@@ -115,6 +133,16 @@ public class AdminDashboardActivity extends AppCompatActivity {
     }
 
     private void setupListeners() {
+        binding.btnSettings.setVisibility(View.VISIBLE);
+        binding.btnSettings.setOnClickListener(v -> {
+            startActivity(new Intent(AdminDashboardActivity.this, com.example.justlocal.SettingsActivity.class));
+        });
+
+        binding.btnNotifications.setVisibility(View.VISIBLE);
+        binding.btnNotifications.setOnClickListener(v -> {
+            startActivity(new Intent(AdminDashboardActivity.this, com.example.justlocal.CustomerClass.NotificationHistoryActivity.class));
+        });
+
         binding.btnViewComplaints.setOnClickListener(v -> {
             Intent intent = new Intent(AdminDashboardActivity.this, AdminComplaintsActivity.class);
             startActivity(intent);
@@ -175,7 +203,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
     private void loadDashboardCounters() {
         showLoading(true);
 
-        final boolean[] done = {false, false};
+        final boolean[] done = {false, false, false};
 
         // 1) Total users
         db.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -212,10 +240,60 @@ public class AdminDashboardActivity extends AppCompatActivity {
                 maybeHideLoading(done);
             }
         });
+
+        // 3) Total Revenue (from Paid payments)
+        db.child("payments").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot paymentSnapshot) {
+                if (!paymentSnapshot.exists()) {
+                    binding.tvTotalRevenue.setText("₱0");
+                    done[2] = true;
+                    maybeHideLoading(done);
+                    return;
+                }
+
+                db.child("orders").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot orderSnapshot) {
+                        double totalRevenue = 0;
+                        for (DataSnapshot pSnap : paymentSnapshot.getChildren()) {
+                            String status = pSnap.child("status").getValue(String.class);
+                            if ("Paid".equalsIgnoreCase(status)) {
+                                String orderId = pSnap.child("orderID").getValue(String.class);
+                                if (orderId != null) {
+                                    DataSnapshot oSnap = orderSnapshot.child(orderId);
+                                    String amountStr = oSnap.child("totalAmount").getValue(String.class);
+                                    if (amountStr != null) {
+                                        try {
+                                            totalRevenue += Double.parseDouble(amountStr);
+                                        } catch (NumberFormatException ignored) {}
+                                    }
+                                }
+                            }
+                        }
+                        binding.tvTotalRevenue.setText(String.format(java.util.Locale.getDefault(), "₱%,.0f", totalRevenue));
+                        done[2] = true;
+                        maybeHideLoading(done);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        done[2] = true;
+                        maybeHideLoading(done);
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                done[2] = true;
+                maybeHideLoading(done);
+            }
+        });
     }
 
     private void maybeHideLoading(boolean[] done) {
-        if (done[0] && done[1]) {
+        if (done[0] && done[1] && done[2]) {
             showLoading(false);
         }
     }

@@ -31,6 +31,10 @@ public class LoginActivity extends AppCompatActivity {
 
         binding.btnLogin.setOnClickListener(v -> loginUser());
 
+        binding.tvForgotPassword.setOnClickListener(v -> {
+            startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+        });
+
         binding.btnQuickAccess.setOnClickListener(v -> {
             startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             finish();

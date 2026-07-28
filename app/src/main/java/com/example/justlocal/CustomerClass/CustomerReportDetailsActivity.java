@@ -52,9 +52,6 @@ public class CustomerReportDetailsActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
         }
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-        );
 
         complaintID = getIntent().getStringExtra("complaintID");
         if (complaintID == null) {
@@ -97,15 +94,20 @@ public class CustomerReportDetailsActivity extends AppCompatActivity {
         rvRecentMessages.setAdapter(messageAdapter);
 
         findViewById(R.id.btnViewOrder).setOnClickListener(v -> {
-            // Optional: open order details activity
-            // startActivity(new Intent(this, CustomerOrderDetailsActivity.class)
-            //         .putExtra("orderID", tvOrderID.getText().toString()));
+            String orderID = tvOrderID.getText().toString().replace("Order #", "");
+            startActivity(new android.content.Intent(this, com.example.justlocal.DeliveryTracking.DeliveryTrackingActivity.class)
+                     .putExtra("orderID", orderID)
+                     .putExtra("userRole", "customer"));
         });
 
         findViewById(R.id.btnAddMessage).setOnClickListener(v -> {
-            // Optional: open add message activity
-            // startActivity(new Intent(this, AddComplaintMessageActivity.class)
-            //         .putExtra("complaintID", complaintID));
+            startActivity(new android.content.Intent(this, CustomerAddComplaintMessage.class)
+                     .putExtra("complaintID", complaintID));
+        });
+
+        findViewById(R.id.btnViewAllMessages).setOnClickListener(v -> {
+            startActivity(new android.content.Intent(this, CustomerAddComplaintMessage.class)
+                    .putExtra("complaintID", complaintID));
         });
     }
 

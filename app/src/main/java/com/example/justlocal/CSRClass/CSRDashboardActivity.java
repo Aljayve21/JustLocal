@@ -36,9 +36,39 @@ public class CSRDashboardActivity extends AppCompatActivity {
         binding = ActivityCsrdashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        checkNotificationPermission();
         setupClickListeners();
         setGreetings();
         loadCSRName();
+        updateFCMToken();
+    }
+
+    private void updateFCMToken() {
+        com.google.firebase.messaging.FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        return;
+                    }
+                    String token = task.getResult();
+                    String userId = FirebaseAuth.getInstance().getUid();
+                    if (userId != null) {
+                        FirebaseDatabase.getInstance().getReference("users")
+                                .child(userId)
+                                .child("fcmToken")
+                                .setValue(token);
+                    }
+                });
+    }
+
+    private void checkNotificationPermission() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            if (androidx.core.content.ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)
+                    != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                androidx.core.app.ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.POST_NOTIFICATIONS},
+                        101);
+            }
+        }
     }
 
     private void setGreetings() {
@@ -96,12 +126,23 @@ public class CSRDashboardActivity extends AppCompatActivity {
 
         // 🛠 Resolve Issues Card
         binding.cardCart.setOnClickListener(v -> {
-            // TODO: Add intent for Resolve Issues screen
+            Intent intent = new Intent(CSRDashboardActivity.this, CSRSupportTicketActivity.class);
+            intent.putExtra("filterStatus", "Open");
+            startActivity(intent);
         });
 
         // 📜 Ticket History Card
         binding.cardOrders.setOnClickListener(v -> {
-            logout();// TODO: Add intent for Ticket History screen
+            Intent intent = new Intent(CSRDashboardActivity.this, CSRSupportTicketActivity.class);
+            startActivity(intent);
+        });
+
+        binding.btnSettings.setOnClickListener(v -> {
+            startActivity(new Intent(this, com.example.justlocal.SettingsActivity.class));
+        });
+
+        binding.btnNotifications.setOnClickListener(v -> {
+            startActivity(new Intent(this, com.example.justlocal.CustomerClass.NotificationHistoryActivity.class));
         });
     }
 

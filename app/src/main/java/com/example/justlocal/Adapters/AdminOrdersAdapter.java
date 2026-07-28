@@ -8,8 +8,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 //import com.example.justlocal.AdminClass.Activities.AdminOrderDetailsActivity;
+import com.example.justlocal.Models.Notification;
 import com.example.justlocal.Models.Order;
 import com.example.justlocal.databinding.AdminOrderItemCardBinding;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -55,12 +58,13 @@ public class AdminOrdersAdapter extends RecyclerView.Adapter<AdminOrdersAdapter.
         holder.binding.tvOrderStatus.setText(order.getStatus());
 
         // ✅ Kung completed, itago yung button
-        if ("Completed".equalsIgnoreCase(order.getStatus())) {
+        if ("Completed".equalsIgnoreCase(order.getStatus()) || "Delivered".equalsIgnoreCase(order.getStatus())) {
             holder.binding.btnTrackOrder.setText("Completed");
             holder.binding.btnTrackOrder.setEnabled(false);
         } else {
             holder.binding.btnTrackOrder.setText("Mark as Delivered");
             holder.binding.btnTrackOrder.setEnabled(true);
+            holder.binding.btnTrackOrder.setOnClickListener(v -> markAsDelivered(order));
         }
 
 
@@ -84,6 +88,34 @@ public class AdminOrdersAdapter extends RecyclerView.Adapter<AdminOrdersAdapter.
             super(binding.getRoot());
             this.binding = binding;
         }
+    }
+
+    /**
+     * Mark order as delivered and notify customer.
+     */
+    private void markAsDelivered(Order order) {
+        DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference("orders").child(order.getOrderID());
+        ordersRef.child("status").setValue("Delivered")
+                .addOnSuccessListener(unused -> {
+                    sendNotification(order.getCustomerID(), "Order Delivered",
+                            "Your order #" + order.getOrderID() + " has been marked as delivered. Thank you for shopping!");
+                });
+    }
+
+    private void sendNotification(String userId, String title, String message) {
+        DatabaseReference notifRef = FirebaseDatabase.getInstance().getReference("notifications").child(userId);
+        String notifId = notifRef.push().getKey();
+        if (notifId == null) return;
+
+        Notification notification = new Notification(
+                notifId,
+                title,
+                message,
+                System.currentTimeMillis(),
+                "order"
+        );
+
+        notifRef.child(notifId).setValue(notification);
     }
 
     /**

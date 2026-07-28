@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.justlocal.Adapters.TicketAdapter;
 import com.example.justlocal.Models.Complaint;
+import com.example.justlocal.Models.Notification;
 import com.example.justlocal.databinding.ActivityCsrsupportTicketBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,17 +44,44 @@ public class CSRSupportTicketActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
         }
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-        );
         complaintsRef = FirebaseDatabase.getInstance().getReference("complaints");
         usersRef = FirebaseDatabase.getInstance().getReference("users");
 
         setupRecyclerView();
         setupListeners();
 
-        // Preload users first, then tickets
-        preloadUsers(this::loadTickets);
+        // Check for filter from Intent
+        String filter = getIntent().getStringExtra("filterStatus");
+        if (filter != null) {
+            preloadUsers(() -> {
+                loadTicketsWithFilter(filter);
+            });
+        } else {
+            // Preload users first, then tickets
+            preloadUsers(this::loadTickets);
+        }
+    }
+
+    private void loadTicketsWithFilter(String filter) {
+        allTickets.clear();
+        complaintsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot child : snapshot.getChildren()) {
+                    Complaint c = child.getValue(Complaint.class);
+                    if (c != null) {
+                        allTickets.add(c);
+                    }
+                }
+                filterTicketsByStatus(filter);
+                updateStats();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                toggleEmptyState();
+            }
+        });
     }
 
     /** 🔹 Setup RecyclerView */
@@ -70,6 +98,8 @@ public class CSRSupportTicketActivity extends AppCompatActivity {
                     String currentStatus = snapshot.getValue(String.class);
                     if ("Open".equalsIgnoreCase(currentStatus)) {
                         complaintRef.child("status").setValue("In Progress");
+                        sendNotificationToCustomer(complaint.getCustomerID(), "Complaint In Progress",
+                                "Your complaint #" + complaint.getComplaintID() + " is now being reviewed by a CSR.");
                     }
 
                     // 👇 Open the ticket details activity
@@ -232,5 +262,21 @@ public class CSRSupportTicketActivity extends AppCompatActivity {
             b.layoutEmptyState.setVisibility(View.GONE);
             b.rvTickets.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void sendNotificationToCustomer(String customerID, String title, String message) {
+        DatabaseReference notifRef = FirebaseDatabase.getInstance().getReference("notifications").child(customerID);
+        String notifId = notifRef.push().getKey();
+        if (notifId == null) return;
+
+        Notification notification = new Notification(
+                notifId,
+                title,
+                message,
+                System.currentTimeMillis(),
+                "complaint"
+        );
+
+        notifRef.child(notifId).setValue(notification);
     }
 }

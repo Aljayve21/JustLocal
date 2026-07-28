@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F9FA"
+    android:background="@color/background_primary"
     tools:context=".AdminClass.AdminDashboardActivity">
 
     <androidx.core.widget.NestedScrollView
@@ -19,22 +19,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Header -->
+            <!-- Header Section -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/header_gradient"
                 android:orientation="vertical"
-                android:padding="20dp"
-                android:paddingTop="40dp">
-
+                android:paddingBottom="32dp">
 
                 <!-- Top Bar -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:paddingTop="10dp"
+                    android:paddingTop="48dp"
+                    android:paddingHorizontal="20dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -44,68 +42,67 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-
                         <TextView
                             android:id="@+id/txtGreetings"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:alpha="0.8"
-                            android:text="Good Morning!"
-                            android:textColor="#FFFFFF"
+                            android:text="@string/greetings_morning"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/poppins_regular"
                             android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/tvSellerName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Juan Dela Cruz"
-                            android:textColor="#FFFFFF"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:text="@string/label_administrator"
+                            android:textColor="@color/white"
+                            android:textSize="22sp"
+                            android:fontFamily="@font/poppins_bold" />
                     </LinearLayout>
 
                     <ImageView
                         android:id="@+id/btnNotifications"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:layout_marginEnd="12dp"
                         android:background="@drawable/circle_button_white"
-                        android:padding="8dp"
-                        android:visibility="gone"
+                        android:padding="10dp"
                         android:src="@drawable/ic_notifications"
                         app:tint="#3B82F6" />
 
                     <ImageView
                         android:id="@+id/btnSettings"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
                         android:background="@drawable/circle_button_white"
-                        android:padding="8dp"
-                        android:visibility="gone"
+                        android:padding="10dp"
                         android:src="@drawable/ic_settings"
                         app:tint="#3B82F6" />
-
                 </LinearLayout>
 
-                <!-- Stats Cards -->
+                <!-- Key Metrics Row -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:paddingHorizontal="20dp"
+                    android:layout_marginTop="24dp"
+                    android:weightSum="3">
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="0dp"
-                        android:layout_height="80dp"
-                        android:layout_marginEnd="8dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:backgroundTint="#FFFFFF"
-                        app:cardCornerRadius="12dp"
-                        app:cardElevation="0dp">
+                        android:layout_marginEnd="6dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="#26FFFFFF">
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:padding="12dp">
@@ -114,34 +111,32 @@
                                 android:id="@+id/tvTotalUsers"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="1,234"
-                                android:textSize="18sp"
-                                android:textStyle="bold"
-                                android:textColor="#3B82F6" />
+                                android:text="0"
+                                android:textSize="20sp"
+                                android:fontFamily="@font/poppins_bold"
+                                android:textColor="@color/white" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Total Users"
+                                android:text="@string/label_users"
                                 android:textSize="12sp"
-                                android:textColor="#3B82F6" />
-
+                                android:textColor="#CCFFFFFF" />
                         </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="0dp"
-                        android:layout_height="80dp"
-                        android:layout_marginHorizontal="4dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:backgroundTint="#FFFFFF"
-                        app:cardCornerRadius="12dp"
-                        app:cardElevation="0dp">
+                        android:layout_marginHorizontal="3dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="#26FFFFFF">
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:padding="12dp">
@@ -150,98 +145,139 @@
                                 android:id="@+id/tvPendingApprovals"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="56"
-                                android:textSize="18sp"
-                                android:textStyle="bold"
-                                android:textColor="#3B82F6" />
+                                android:text="0"
+                                android:textSize="20sp"
+                                android:fontFamily="@font/poppins_bold"
+                                android:textColor="@color/white" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Pending"
+                                android:text="@string/label_pending"
                                 android:textSize="12sp"
-                                android:textColor="#3B82F6" />
-
+                                android:textColor="#CCFFFFFF" />
                         </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
 
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="6dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="#26FFFFFF">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:id="@+id/tvTotalRevenue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="₱0"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/poppins_bold"
+                                android:textColor="@color/white" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/label_revenue"
+                                android:textSize="12sp"
+                                android:textColor="#CCFFFFFF" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Main Menu -->
+            <!-- Content Area -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="20dp"
+                android:layout_marginTop="-24dp"
+                android:background="@drawable/top_rounded_white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_dashboard_overview"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginBottom="16dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvDashboardMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
                     android:layout_marginBottom="24dp" />
-            </LinearLayout>
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:visibility="gone" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <!-- Quick Actions -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Quick Actions"
+                    android:text="@string/label_quick_management"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="#1F2937"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/text_primary"
                     android:layout_marginBottom="16dp" />
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="20dp">
-
-                <Button
-                    android:id="@+id/btnViewComplaints"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    android:text="View Complaints"
-                    android:textSize="12sp"
-                    android:backgroundTint="#EF4444"
-                    app:cornerRadius="8dp" />
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="32dp">
 
-                <Button
-                    android:id="@+id/btnGenerateReport"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    android:text="Generate Report"
-                    android:textSize="12sp"
-                    android:backgroundTint="#8B5CF6"
-                    app:cornerRadius="8dp" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnViewComplaints"
+                        android:layout_width="0dp"
+                        android:layout_height="64dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/label_complaints"
+                        android:fontFamily="@font/poppins_semibold"
+                        app:icon="@drawable/ic_complaints"
+                        app:iconGravity="textStart"
+                        android:backgroundTint="#FFF1F2"
+                        android:textColor="#EF4444"
+                        app:iconTint="#EF4444"
+                        app:cornerRadius="16dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="#FEE2E2" />
 
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnGenerateReport"
+                        android:layout_width="0dp"
+                        android:layout_height="64dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/label_reports"
+                        android:fontFamily="@font/poppins_semibold"
+                        app:icon="@drawable/ic_analytics"
+                        app:iconGravity="textStart"
+                        android:backgroundTint="#F5F3FF"
+                        android:textColor="#8B5CF6"
+                        app:iconTint="#8B5CF6"
+                        app:cornerRadius="16dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="#EDE9FE" />
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
             </LinearLayout>
-
         </LinearLayout>
-
-
-
-
     </androidx.core.widget.NestedScrollView>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

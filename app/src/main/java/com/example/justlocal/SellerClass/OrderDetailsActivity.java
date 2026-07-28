@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.justlocal.DeliveryTracking.DeliveryTrackingActivity;
+import com.example.justlocal.Models.Notification;
 import com.example.justlocal.Models.Order;
 import com.example.justlocal.databinding.ActivityOrderDetailsBinding;
 import com.google.firebase.database.DataSnapshot;
@@ -37,11 +38,6 @@ public class OrderDetailsActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
         }
-
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-        );
 
         orderID = getIntent().getStringExtra("orderID");
         if (orderID == null || orderID.isEmpty()) {
@@ -88,6 +84,9 @@ public class OrderDetailsActivity extends AppCompatActivity {
             timelineData.put("timestamp", currentTime);
             timelineRef.push().setValue(timelineData);
 
+            // Notify Customer
+            loadOrderAndNotify(orderID, "Order Accepted", "Your order #" + orderID + " has been accepted by the seller.");
+
             Toast.makeText(this, "Order accepted successfully", Toast.LENGTH_SHORT).show();
 
             // Redirect to DeliveryTrackingActivity
@@ -113,11 +112,45 @@ public class OrderDetailsActivity extends AppCompatActivity {
                     .addOnSuccessListener(unused -> {
                         Toast.makeText(this, "Order rejected successfully", Toast.LENGTH_SHORT).show();
                         binding.tvStatus.setText("Status: rejected");
+                        // Notify Customer
+                        loadOrderAndNotify(orderID, "Order Rejected", "We're sorry, but your order #" + orderID + " has been rejected by the seller.");
                     })
                     .addOnFailureListener(e -> {
                         Toast.makeText(this, "Failed to reject order: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
         });
+    }
+
+    private void loadOrderAndNotify(String orderID, String title, String message) {
+        FirebaseDatabase.getInstance().getReference("orders").child(orderID)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Order order = snapshot.getValue(Order.class);
+                        if (order != null) {
+                            sendNotification(order.getCustomerID(), title, message);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {}
+                });
+    }
+
+    private void sendNotification(String userId, String title, String message) {
+        DatabaseReference notifRef = FirebaseDatabase.getInstance().getReference("notifications").child(userId);
+        String notifId = notifRef.push().getKey();
+        if (notifId == null) return;
+
+        Notification notification = new Notification(
+                notifId,
+                title,
+                message,
+                System.currentTimeMillis(),
+                "order"
+        );
+
+        notifRef.child(notifId).setValue(notification);
     }
 
     private void loadOrderDetails() {
