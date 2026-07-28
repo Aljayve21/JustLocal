@@ -218,7 +218,7 @@
                         app:selectionRequired="true">
 
                         <com.google.android.material.chip.Chip
-                            android:id="@+id/chipAll"
+                            android:id="@+id/btnFilterAll"
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -228,25 +228,32 @@
                             app:chipStrokeColor="@color/primary_color" />
 
                         <com.google.android.material.chip.Chip
-                            android:id="@+id/chipOpen"
+                            android:id="@+id/btnFilterOpen"
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/label_open" />
 
                         <com.google.android.material.chip.Chip
-                            android:id="@+id/chipInProgress"
+                            android:id="@+id/btnFilterInProgress"
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/label_status_in_progress" />
 
                         <com.google.android.material.chip.Chip
-                            android:id="@+id/chipResolved"
+                            android:id="@+id/btnFilterResolved"
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/label_resolved" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/btnFilterClosed"
+                            style="@style/Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_closed" />
 
                     </com.google.android.material.chip.ChipGroup>
                 </HorizontalScrollView>

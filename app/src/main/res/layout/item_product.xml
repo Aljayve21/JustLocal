@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -70,7 +71,7 @@
                 android:id="@+id/tvProductName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:tools:text="Iphone 16 PRO MAX"
+                tools:text="Iphone 16 PRO MAX"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="#1F2937"
@@ -83,7 +84,7 @@
                 android:id="@+id/tvProductDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:tools:text="IOS 26"
+                tools:text="IOS 26"
                 android:textSize="12sp"
                 android:textColor="#6B7280"
                 android:maxLines="2"
@@ -108,7 +109,7 @@
                         android:id="@+id/tvPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:tools:text="₱22,999.00"
+                        tools:text="₱22,999.00"
                         android:textColor="#059669"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -117,7 +118,7 @@
                         android:id="@+id/tvQuantity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:tools:text="200pcs available"
+                        tools:text="200pcs available"
                         android:textColor="#9CA3AF"
                         android:textSize="10sp" />
 
@@ -153,7 +154,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:tools:text="Apple Store"
+                    tools:text="Apple Store"
                     android:textSize="11sp"
                     android:textColor="#6B7280"
                     android:maxLines="1"
@@ -176,7 +177,7 @@
                         android:id="@+id/tvRating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:tools:text="4.5"
+                        tools:text="4.5"
                         android:textSize="10sp"
                         android:textColor="#FBBF24" />
 

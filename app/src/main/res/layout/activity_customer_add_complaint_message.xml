@@ -49,7 +49,7 @@
                 android:id="@+id/tvComplaintIDHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tools:text="Complaint #12345"
+                tools:text="Complaint #12345"
                 android:textSize="11sp"
                 android:textColor="#6B7280" />
 
@@ -136,7 +136,7 @@
                 android:id="@+id/tvOriginalComplaint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:tools:text="I haven't received my order yet despite tracking showing delivered."
+                tools:text="I haven't received my order yet despite tracking showing delivered."
                 android:textSize="13sp"
                 android:textColor="#1F2937"
                 android:maxLines="2"
@@ -174,7 +174,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:tools:text="#ORD12345"
+                        tools:text="#ORD12345"
                         android:textSize="11sp"
                         android:textStyle="bold"
                         android:textColor="#1F2937" />
@@ -198,7 +198,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:tools:text="Aug 04, 2025 - 3:45 PM"
+                        tools:text="Aug 04, 2025 - 3:45 PM"
                         android:textSize="11sp"
                         android:textColor="#6B7280" />
 

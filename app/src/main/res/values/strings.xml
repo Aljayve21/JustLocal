@@ -146,6 +146,7 @@
     <string name="label_all">All</string>
     <string name="label_open">Open</string>
     <string name="label_resolved">Resolved</string>
+    <string name="label_closed">Closed</string>
     <string name="label_save">Save</string>
     <string name="label_today">Today</string>
     <string name="placeholder_name">John Doe</string>
@@ -175,6 +176,7 @@
     <!-- CSR Respond Ticket -->
     <string name="placeholder_ticket_id">Ticket #12345</string>
     <string name="placeholder_customer_name">Juan Dela Cruz</string>
+    <string name="placeholder_product_id">Product ID: %s</string>
     <string name="label_status_in_progress">In Progress</string>
     <string name="label_no_conversation">No conversation yet</string>
     <string name="msg_start_conversation">Start the conversation by sending a message to the customer.</string>
@@ -304,3 +306,5 @@
     <string name="desc_customer_icon">Customer icon</string>
     <string name="desc_payment_icon">Payment icon</string>
     <string name="desc_delivery_icon">Delivery icon</string>
+    <string name="placeholder_character_count">0/500</string>
+</resources>

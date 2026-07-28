@@ -190,6 +190,17 @@
                         app:iconTint="@color/error_color" />
                 </LinearLayout>
 
+                <!-- Character Count -->
+                <TextView
+                    android:id="@+id/tvCharacterCount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/placeholder_character_count"
+                    android:textSize="11sp"
+                    android:textColor="#9CA3AF"
+                    android:gravity="end"
+                    android:layout_marginBottom="8dp" />
+
                 <!-- Input Area -->
                 <RelativeLayout
                     android:layout_width="match_parent"

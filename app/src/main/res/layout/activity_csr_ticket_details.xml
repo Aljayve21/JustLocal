@@ -236,6 +236,14 @@
                                 android:fontFamily="@font/poppins_semibold"
                                 android:textSize="14sp"
                                 android:textColor="#2563EB" />
+
+                            <TextView
+                                android:id="@+id/tvProductID"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/placeholder_product_id"
+                                android:textSize="11sp"
+                                android:textColor="@color/secondary_text" />
                         </LinearLayout>
 
                         <ImageView
