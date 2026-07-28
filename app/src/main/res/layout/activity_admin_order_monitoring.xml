@@ -33,7 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Order Monitoring"
+            android:text="@string/label_order_monitoring"
             android:textStyle="bold"
             android:textColor="#1F2937"
             android:textSize="20sp"
@@ -84,7 +84,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Total Orders"
+                        android:text="@string/label_total_orders"
                         android:textSize="12sp"
                         android:textColor="#6B7280"
                         android:layout_marginBottom="4dp" />
@@ -114,7 +114,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Pending"
+                        android:text="@string/label_pending"
                         android:textSize="12sp"
                         android:textColor="#6B7280"
                         android:layout_marginBottom="4dp" />
@@ -153,7 +153,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Processing"
+                        android:text="@string/label_processing"
                         android:textSize="12sp"
                         android:textColor="#6B7280"
                         android:layout_marginBottom="4dp" />
@@ -183,7 +183,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Completed"
+                        android:text="@string/label_completed"
                         android:textSize="12sp"
                         android:textColor="#6B7280"
                         android:layout_marginBottom="4dp" />
@@ -262,7 +262,7 @@
                     android:id="@+id/btnFilterAll"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
-                    android:text="All"
+                    android:text="@string/label_all"
                     android:textSize="14sp"
                     android:textColor="#FFFFFF"
                     android:backgroundTint="#2563EB"
@@ -275,7 +275,7 @@
                     android:id="@+id/btnFilterPending"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
-                    android:text="Pending"
+                    android:text="@string/label_pending"
                     android:textSize="14sp"
                     android:textColor="#6B7280"
                     android:backgroundTint="#E5E7EB"
@@ -288,7 +288,7 @@
                     android:id="@+id/btnFilterProcessing"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
-                    android:text="Processing"
+                    android:text="@string/label_processing"
                     android:textSize="14sp"
                     android:textColor="#6B7280"
                     android:backgroundTint="#E5E7EB"
@@ -301,7 +301,7 @@
                     android:id="@+id/btnFilterDelivery"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
-                    android:text="Out for Delivery"
+                    android:text="@string/label_out_for_delivery"
                     android:textSize="14sp"
                     android:textColor="#6B7280"
                     android:backgroundTint="#E5E7EB"
@@ -314,7 +314,7 @@
                     android:id="@+id/btnFilterCompleted"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
-                    android:text="Completed"
+                    android:text="@string/label_completed"
                     android:textSize="14sp"
                     android:textColor="#6B7280"
                     android:backgroundTint="#E5E7EB"
@@ -341,7 +341,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="All Orders (156)"
+            android:text="@string/label_orders"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="#1F2937" />
@@ -390,7 +390,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No Orders Found"
+            android:text="@string/msg_no_orders_found"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#1F2937"
@@ -399,7 +399,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="There are no orders matching your criteria"
+            android:text="@string/msg_no_orders_matching"
             android:textSize="14sp"
             android:textColor="#6B7280"
             android:textAlignment="center" />

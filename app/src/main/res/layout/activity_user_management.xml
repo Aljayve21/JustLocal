@@ -31,7 +31,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="User Management"
+            android:text="@string/label_user_management"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#1F2937"
@@ -119,7 +119,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total Users"
+                    android:text="@string/label_total_users"
                     android:textSize="12sp"
                     android:textColor="#6B7280" />
 
@@ -145,7 +145,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Active"
+                    android:text="@string/label_active"
                     android:textSize="12sp"
                     android:textColor="#6B7280" />
 
@@ -171,7 +171,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Inactive"
+                    android:text="@string/label_inactive"
                     android:textSize="12sp"
                     android:textColor="#6B7280" />
 
@@ -198,7 +198,7 @@
                 android:id="@+id/chipAll"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:text="All Users"
+                android:text="@string/label_all_users"
                 android:textSize="12sp"
                 android:textColor="#6B7280"
                 android:background="@drawable/chip_selected"
@@ -211,7 +211,7 @@
                 android:id="@+id/chipSellers"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:text="Sellers"
+                android:text="@string/label_sellers"
                 android:textSize="12sp"
                 android:textColor="#6B7280"
                 android:background="@drawable/chip_unselected"
@@ -224,7 +224,7 @@
                 android:id="@+id/chipCustomers"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:text="Customers"
+                android:text="@string/label_customers"
                 android:textSize="12sp"
                 android:textColor="#6B7280"
                 android:background="@drawable/chip_unselected"
@@ -237,7 +237,7 @@
                 android:id="@+id/chipCSR"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:text="CSR"
+                android:text="@string/label_csr"
                 android:textSize="12sp"
                 android:textColor="#6B7280"
                 android:background="@drawable/chip_unselected"

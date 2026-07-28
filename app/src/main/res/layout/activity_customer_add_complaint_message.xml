@@ -40,7 +40,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Complaint Conversation"
+                android:text="@string/label_complaint_conversation"
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:textColor="#1F2937" />
@@ -49,7 +49,7 @@
                 android:id="@+id/tvComplaintIDHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Complaint #12345"
+                android:tools:text="Complaint #12345"
                 android:textSize="11sp"
                 android:textColor="#6B7280" />
 
@@ -59,7 +59,7 @@
             android:id="@+id/tvStatusBadge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Active"
+            android:text="@string/label_active"
             android:textSize="10sp"
             android:textStyle="bold"
             android:textColor="#059669"
@@ -116,7 +116,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Original Complaint"
+                    android:text="@string/label_original_complaint"
                     android:textSize="11sp"
                     android:textStyle="bold"
                     android:textColor="#2563EB" />
@@ -136,7 +136,7 @@
                 android:id="@+id/tvOriginalComplaint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="I haven't received my order yet despite tracking showing delivered."
+                android:tools:text="I haven't received my order yet despite tracking showing delivered."
                 android:textSize="13sp"
                 android:textColor="#1F2937"
                 android:maxLines="2"
@@ -165,7 +165,7 @@
                     <TextView
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:text="Order ID:"
+                        android:text="@string/label_order_details"
                         android:textSize="11sp"
                         android:textColor="#6B7280" />
 
@@ -174,7 +174,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="#ORD12345"
+                        android:tools:text="#ORD12345"
                         android:textSize="11sp"
                         android:textStyle="bold"
                         android:textColor="#1F2937" />
@@ -189,7 +189,7 @@
                     <TextView
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:text="Created:"
+                        android:text="@string/label_report_type"
                         android:textSize="11sp"
                         android:textColor="#6B7280" />
 
@@ -198,7 +198,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Aug 04, 2025 - 3:45 PM"
+                        android:tools:text="Aug 04, 2025 - 3:45 PM"
                         android:textSize="11sp"
                         android:textColor="#6B7280" />
 
@@ -246,7 +246,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No conversation yet"
+            android:text="@string/label_no_conversation"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="#6B7280"
@@ -255,7 +255,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Start the conversation by sending a message"
+            android:text="@string/msg_start_conversation"
             android:textSize="13sp"
             android:textColor="#9CA3AF"
             android:textAlignment="center" />
@@ -284,7 +284,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Support team is typing..."
+            android:text="@string/msg_support_typing"
             android:textSize="12sp"
             android:textStyle="italic"
             android:textColor="#6B7280" />
@@ -389,7 +389,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
-                        android:hint="Type your message..."
+                        android:hint="@string/hint_type_message"
                         android:textSize="14sp"
                         android:textColor="#1F2937"
                         android:textColorHint="#9CA3AF"
@@ -457,7 +457,7 @@
                     android:id="@+id/chipQuickReply1"
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
-                    android:text="Need update"
+                    android:text="@string/label_need_update"
                     android:textSize="12sp"
                     android:textColor="#6B7280"
                     app:chipBackgroundColor="#F3F4F6"
@@ -469,7 +469,7 @@
                     android:id="@+id/chipQuickReply2"
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
-                    android:text="Still waiting"
+                    android:text="@string/label_still_waiting"
                     android:textSize="12sp"
                     android:textColor="#6B7280"
                     app:chipBackgroundColor="#F3F4F6"
@@ -481,7 +481,7 @@
                     android:id="@+id/chipQuickReply3"
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
-                    android:text="Thank you"
+                    android:text="@string/label_thank_you"
                     android:textSize="12sp"
                     android:textColor="#6B7280"
                     app:chipBackgroundColor="#F3F4F6"

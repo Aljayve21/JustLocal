@@ -32,7 +32,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Generate Report"
+                android:text="@string/label_generate_report"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:textColor="#1F2937"
@@ -61,7 +61,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Date range"
+                android:text="@string/label_date_range"
                 android:textSize="12sp"
                 android:textColor="#6B7280"
                 android:layout_marginBottom="6dp" />
@@ -89,7 +89,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Select date range"
+                    android:text="@string/label_select_date_range"
                     android:textSize="14sp"
                     android:textColor="#1F2937" />
 
@@ -105,7 +105,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Report type"
+                android:text="@string/label_report_type"
                 android:textSize="12sp"
                 android:textColor="#6B7280"
                 android:layout_marginBottom="6dp" />
@@ -133,7 +133,7 @@
                     android:layout_width="0dp"
                     android:layout_height="36dp"
                     android:layout_weight="1"
-                    android:text="This Week"
+                    android:text="@string/label_this_week"
                     android:textSize="12sp"
                     android:textColor="#2563EB"
                     android:backgroundTint="#EFF6FF"
@@ -144,7 +144,7 @@
                     android:layout_width="0dp"
                     android:layout_height="36dp"
                     android:layout_weight="1"
-                    android:text="This Month"
+                    android:text="@string/label_this_month"
                     android:textSize="12sp"
                     android:textColor="#2563EB"
                     android:backgroundTint="#EFF6FF"
@@ -155,7 +155,7 @@
                     android:layout_width="0dp"
                     android:layout_height="36dp"
                     android:layout_weight="1"
-                    android:text="Custom"
+                    android:text="@string/label_custom"
                     android:textSize="12sp"
                     android:textColor="#6B7280"
                     android:backgroundTint="#F3F4F6" />
@@ -203,7 +203,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total Orders"
+                        android:text="@string/label_total_orders"
                         android:textSize="12sp"
                         android:textColor="#6B7280" />
 
@@ -230,7 +230,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Revenue"
+                        android:text="@string/label_revenue"
                         android:textSize="12sp"
                         android:textColor="#6B7280" />
 
@@ -265,7 +265,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Complaints"
+                        android:text="@string/label_complaints"
                         android:textSize="12sp"
                         android:textColor="#6B7280" />
 

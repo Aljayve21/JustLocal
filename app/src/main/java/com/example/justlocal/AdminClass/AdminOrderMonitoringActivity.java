@@ -65,11 +65,6 @@ public class AdminOrderMonitoringActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
         }
 
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-        );
-
         // 🔙 Back Button
         binding.btnBack.setOnClickListener(v -> finish());
 

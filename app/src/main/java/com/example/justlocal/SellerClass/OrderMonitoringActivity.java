@@ -47,10 +47,6 @@ public class OrderMonitoringActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
         }
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-        );
 
         ordersRef = FirebaseDatabase.getInstance().getReference("orders");
 

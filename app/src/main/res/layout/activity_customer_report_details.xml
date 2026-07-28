@@ -39,7 +39,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Complaint Details"
+                android:text="@string/label_complaint_details"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:textColor="#1F2937" />
@@ -58,7 +58,7 @@
             android:id="@+id/tvHeaderStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pending"
+            android:text="@string/label_pending"
             android:textSize="11sp"
             android:textStyle="bold"
             android:textColor="#F59E0B"
@@ -105,7 +105,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Complaint Status"
+                    android:text="@string/label_complaint_status"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="#1F2937"
@@ -173,7 +173,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="In Review"
+                            android:text="@string/label_processing"
                             android:textSize="10sp"
                             android:textColor="#F59E0B"
                             android:textStyle="bold"
@@ -209,7 +209,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Resolved"
+                            android:text="@string/label_resolved"
                             android:textSize="10sp"
                             android:textColor="#9CA3AF"
                             android:textAlignment="center" />
@@ -267,7 +267,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Your Complaint"
+                    android:text="@string/label_your_complaint"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="#1F2937"
@@ -326,7 +326,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Related Order"
+                                android:text="@string/label_related_order"
                                 android:textSize="11sp"
                                 android:textColor="#6B7280" />
 
@@ -375,7 +375,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Related Product"
+                                android:text="@string/label_related_product"
                                 android:textSize="11sp"
                                 android:textColor="#6B7280" />
 
@@ -513,7 +513,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Conversation History"
+                        android:text="@string/label_conversation_history"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:textColor="#1F2937" />

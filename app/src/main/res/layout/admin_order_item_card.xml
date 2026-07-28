@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -29,7 +30,7 @@
                 android:id="@+id/tvOrderID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Order #12345"
+                tools:text="Order #12345"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="#1F2937"
@@ -39,7 +40,7 @@
                 android:id="@+id/tvOrderDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Aug 03, 2025 - 2:30 PM"
+                tools:text="Aug 03, 2025 - 2:30 PM"
                 android:textSize="12sp"
                 android:textColor="#6B7280" />
 
@@ -49,7 +50,7 @@
             android:id="@+id/tvOrderStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pending"
+            tools:text="Pending"
             android:textSize="12sp"
             android:textStyle="bold"
             android:textColor="#F59E0B"
@@ -81,13 +82,13 @@
                 android:layout_height="16dp"
                 android:src="@drawable/ic_store"
                 android:layout_marginEnd="8dp"
-                android:contentDescription="Seller icon" />
+                android:contentDescription="@string/desc_seller_icon" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Seller:"
+                android:text="@string/label_seller_colon"
                 android:textSize="14sp"
                 android:textColor="#6B7280" />
 
@@ -95,7 +96,7 @@
                 android:id="@+id/tvSellerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tech Store Manila"
+                tools:text="Tech Store Manila"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="#1F2937" />
@@ -115,13 +116,13 @@
                 android:layout_height="16dp"
                 android:src="@drawable/ic_person"
                 android:layout_marginEnd="8dp"
-                android:contentDescription="Customer icon" />
+                android:contentDescription="@string/desc_customer_icon" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Customer:"
+                android:text="@string/label_customer_colon"
                 android:textSize="14sp"
                 android:textColor="#6B7280" />
 
@@ -129,7 +130,7 @@
                 android:id="@+id/tvCustomerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Juan Dela Cruz"
+                tools:text="Juan Dela Cruz"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="#1F2937" />
@@ -149,13 +150,13 @@
                 android:layout_height="16dp"
                 android:src="@drawable/ic_payment"
                 android:layout_marginEnd="8dp"
-                android:contentDescription="Payment icon" />
+                android:contentDescription="@string/desc_payment_icon" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Payment:"
+                android:text="@string/label_payment_colon"
                 android:textSize="14sp"
                 android:textColor="#6B7280" />
 
@@ -163,7 +164,7 @@
                 android:id="@+id/tvPaymentMethod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="GCash"
+                tools:text="GCash"
                 android:textSize="14sp"
                 android:textColor="#1F2937" />
 
@@ -182,13 +183,13 @@
                 android:layout_height="16dp"
                 android:src="@drawable/ic_delivery"
                 android:layout_marginEnd="8dp"
-                android:contentDescription="Delivery icon" />
+                android:contentDescription="@string/desc_delivery_icon" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Delivery:"
+                android:text="@string/label_delivery_colon"
                 android:textSize="14sp"
                 android:textColor="#6B7280" />
 
@@ -196,7 +197,7 @@
                 android:id="@+id/tvDeliveryMethod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Standard Delivery"
+                tools:text="Standard Delivery"
                 android:textSize="14sp"
                 android:textColor="#1F2937" />
 
@@ -220,7 +221,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Total Amount:"
+                android:text="@string/label_total_amount_colon"
                 android:textSize="14sp"
                 android:textColor="#6B7280" />
 
@@ -228,7 +229,7 @@
                 android:id="@+id/tvTotalAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="₱22,999.00"
+                tools:text="₱22,999.00"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="#1F2937" />
@@ -250,7 +251,7 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="View Details"
+            android:text="@string/label_view_details"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="#2563EB"
@@ -263,7 +264,7 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="Track Order"
+            android:text="@string/label_track_order"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"

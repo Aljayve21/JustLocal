@@ -131,4 +131,176 @@
         <item>Last 30 Days</item>
         <item>Custom</item>
     </string-array>
-</resources>
+    <!-- Shared Labels -->
+    <string name="label_orders">Orders</string>
+    <string name="label_logout">Logout</string>
+    <string name="label_see_all">See All</string>
+    <string name="label_view_more">View More</string>
+    <string name="label_pending">Pending</string>
+    <string name="label_completed">Completed</string>
+    <string name="label_processing">Processing</string>
+    <string name="label_in_review">In Review</string>
+    <string name="label_active">Active</string>
+    <string name="label_inactive">Inactive</string>
+    <string name="label_out_for_delivery">Out for Delivery</string>
+    <string name="label_all">All</string>
+    <string name="label_open">Open</string>
+    <string name="label_resolved">Resolved</string>
+    <string name="label_save">Save</string>
+    <string name="label_today">Today</string>
+    <string name="placeholder_name">John Doe</string>
+
+    <!-- Seller Dashboard -->
+    <string name="greetings_morning">Good Morning,</string>
+    <string name="label_products">Products</string>
+    <string name="label_sales">Sales</string>
+    <string name="label_business_management">Business Management</string>
+    <string name="label_inventory">Inventory</string>
+    <string name="label_my_profile">My Profile</string>
+    <string name="label_sign_out">Sign Out</string>
+    <string name="label_recent_activity">Recent Activity</string>
+    <string name="msg_no_recent_activity">No recent sales activity to show.</string>
+    <string name="label_add_product">Add Product</string>
+
+    <!-- Customer Dashboard -->
+    <string name="greetings_welcome_back">Welcome back,</string>
+    <string name="hint_search_products">Search for fresh local products...</string>
+    <string name="label_discover">Discover</string>
+    <string name="label_shop_all">Shop All</string>
+    <string name="label_ai_scanner">AI Scanner</string>
+    <string name="label_support">Support</string>
+    <string name="label_account">Account</string>
+    <string name="label_recent_products">Recent Products</string>
+
+    <!-- CSR Respond Ticket -->
+    <string name="placeholder_ticket_id">Ticket #12345</string>
+    <string name="placeholder_customer_name">Juan Dela Cruz</string>
+    <string name="label_status_in_progress">In Progress</string>
+    <string name="label_no_conversation">No conversation yet</string>
+    <string name="msg_start_conversation">Start the conversation by sending a message to the customer.</string>
+    <string name="label_resolve">Resolve</string>
+    <string name="label_escalate">Escalate</string>
+    <string name="hint_type_message">Type your message...</string>
+    <string name="template_checking_now">Checking now</string>
+    <string name="template_update_soon">Will update soon</string>
+    <string name="template_issue_resolved">Issue resolved</string>
+
+    <!-- Admin Dashboard -->
+    <string name="label_administrator">Administrator</string>
+    <string name="label_users">Users</string>
+    <string name="label_revenue">Revenue</string>
+    <string name="label_dashboard_overview">Dashboard Overview</string>
+    <string name="label_quick_management">Quick Management</string>
+    <string name="label_complaints">Complaints</string>
+    <string name="label_reports">Reports</string>
+
+    <!-- Admin Order Monitoring -->
+    <string name="label_order_monitoring">Order Monitoring</string>
+    <string name="label_total_orders">Total Orders</string>
+    <string name="msg_no_orders_found">No Orders Found</string>
+    <string name="msg_no_orders_matching">There are no orders matching your criteria</string>
+    <string name="template_all_orders_count">All Orders (%s)</string>
+
+    <!-- User Management -->
+    <string name="label_user_management">User Management</string>
+    <string name="label_total_users">Total Users</string>
+    <string name="label_all_users">All Users</string>
+    <string name="label_sellers">Sellers</string>
+    <string name="label_customers">Customers</string>
+    <string name="label_csr">CSR</string>
+
+    <!-- Product Management -->
+    <string name="label_product_management">Product Management</string>
+    <string name="hint_search_products_simple">Search products...</string>
+    <string name="label_total_products">Total Products</string>
+    <string name="label_approved">Approved</string>
+    <string name="label_rejected">Rejected</string>
+    <string name="label_all_products">All Products</string>
+
+    <!-- Admin Generate Report -->
+    <string name="label_generate_report">Generate Report</string>
+    <string name="label_date_range">Date range</string>
+    <string name="label_select_date_range">Select date range</string>
+    <string name="label_report_type">Report type</string>
+    <string name="label_this_week">This Week</string>
+    <string name="label_this_month">This Month</string>
+    <string name="label_custom">Custom</string>
+
+    <!-- Support Tickets -->
+    <string name="label_support_tickets">Support Tickets</string>
+    <string name="label_total">Total</string>
+    <string name="label_solved">Solved</string>
+    <string name="hint_search_tickets">Search tickets...</string>
+    <string name="label_active_tickets">Active Tickets</string>
+    <string name="label_sort_newest">Sort by Newest</string>
+    <string name="label_no_tickets_found">No Tickets Found</string>
+    <string name="msg_adjust_filters">Try adjusting your filters</string>
+    <string name="msg_support_typing">Support team is typing...</string>
+    <string name="label_original_complaint">Original Complaint</string>
+    <string name="label_need_update">Need update</string>
+    <string name="label_still_waiting">Still waiting</string>
+    <string name="label_thank_you">Thank you</string>
+    <string name="label_support_team">Support Team</string>
+
+    <!-- CSR Ticket Details -->
+    <string name="label_customer_info">Customer Information</string>
+    <string name="label_complaint_details">Complaint Details</string>
+    <string name="msg_loading_message">Loading message...</string>
+    <string name="label_linked_order">Linked Order</string>
+    <string name="label_conversation_history">Conversation History</string>
+    <string name="label_view_chat_history">View Chat History</string>
+    <string name="label_order_details">Order Details</string>
+    <string name="label_respond">Respond</string>
+
+    <!-- Customer Reports & Complaints -->
+    <string name="label_my_reports">My Reports</string>
+    <string name="label_total_reports">Total Reports</string>
+    <string name="label_complaint_status">Complaint Status</string>
+    <string name="label_your_complaint">Your Complaint</string>
+    <string name="label_related_order">Related Order</string>
+    <string name="label_related_product">Related Product</string>
+    <string name="label_complaint_conversation">Complaint Conversation</string>
+    <string name="template_complaint_id">Complaint #%s</string>
+    <string name="template_order_id">Order #%s</string>
+    <string name="template_product_id">Product ID: %s</string>
+    <string name="template_customer_id">Customer: %s</string>
+    <string name="template_created_at">Created: %s</string>
+    <string name="template_last_updated">Last updated %s</string>
+    <string name="msg_no_complaints_found">No complaints found</string>
+
+    <!-- User Address -->
+    <string name="label_address">Address</string>
+    <string name="label_address_type">Address Type</string>
+    <string name="label_home">Home</string>
+    <string name="label_office">Office</string>
+    <string name="label_default_address">Set as Default Address</string>
+    <string name="label_save_address">Save Address</string>
+
+    <!-- Item Labels -->
+    <string name="label_in_stock">In Stock</string>
+    <string name="template_available_stock">%s available</string>
+    <string name="template_status_delivered">Status: Delivered</string>
+    <string name="template_total_amount">Total: %s</string>
+
+    <string name="label_reference_no">Reference No:</string>
+    <string name="label_seller_colon">Seller:</string>
+    <string name="label_note_colon">Note:</string>
+    <string name="label_amount_paid">Amount Paid:</string>
+    <string name="label_customer_colon">Customer:</string>
+    <string name="label_payment_colon">Payment:</string>
+    <string name="label_delivery_colon">Delivery:</string>
+    <string name="label_total_amount_colon">Total Amount:</string>
+    <string name="label_view_details">View Details</string>
+    <string name="label_track_order">Track Order</string>
+    <string name="label_resolved_reports">Resolved Reports</string>
+    <string name="hint_search_reports">Search reports...</string>
+    <string name="label_create_report">Create Report</string>
+    <string name="msg_no_reports_yet">No Reports Yet</string>
+    <string name="msg_empty_reports_desc">You haven\'t submitted any reports.\nCreate your first report to get started.</string>
+    <string name="desc_create_report">Create new report</string>
+    <string name="template_reports_count">All Reports (%s)</string>
+    <string name="template_resolved_count">%1$s out of %2$s</string>
+    <string name="desc_seller_icon">Seller icon</string>
+    <string name="desc_customer_icon">Customer icon</string>
+    <string name="desc_payment_icon">Payment icon</string>
+    <string name="desc_delivery_icon">Delivery icon</string>

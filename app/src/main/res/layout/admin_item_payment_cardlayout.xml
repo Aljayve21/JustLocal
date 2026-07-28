@@ -37,7 +37,7 @@
                 android:id="@+id/tvPaymentMethod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="GCash Payment"
+                android:tools:text="GCash Payment"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="#1F2937"
@@ -47,7 +47,7 @@
                 android:id="@+id/tvPaymentDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Aug 04, 2025 - 3:45 PM"
+                android:tools:text="Aug 04, 2025 - 3:45 PM"
                 android:textSize="12sp"
                 android:textColor="#6B7280" />
 
@@ -57,7 +57,7 @@
             android:id="@+id/tvPaymentStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Paid"
+            android:tools:text="Paid"
             android:textSize="12sp"
             android:textStyle="bold"
             android:textColor="#059669"
@@ -89,7 +89,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Order ID:"
+                android:text="@string/label_order_details"
                 android:textSize="14sp"
                 android:textColor="#6B7280" />
 
@@ -97,7 +97,7 @@
                 android:id="@+id/tvOrderID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="#12345"
+                android:tools:text="#12345"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="#2563EB" />
@@ -115,7 +115,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Reference No:"
+                android:text="@string/label_reference_no"
                 android:textSize="14sp"
                 android:textColor="#6B7280" />
 
@@ -123,7 +123,7 @@
                 android:id="@+id/tvReferenceNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="GC-20250804-12345"
+                android:tools:text="GC-20250804-12345"
                 android:textSize="14sp"
                 android:textColor="#1F2937" />
 
@@ -140,7 +140,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Customer:"
+                android:text="@string/label_customer_info"
                 android:textSize="14sp"
                 android:textColor="#6B7280" />
 
@@ -148,7 +148,7 @@
                 android:id="@+id/tvCustomerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Juan Dela Cruz"
+                android:tools:text="Juan Dela Cruz"
                 android:textSize="14sp"
                 android:textColor="#1F2937" />
 
@@ -165,7 +165,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Seller:"
+                android:text="@string/label_seller_colon"
                 android:textSize="14sp"
                 android:textColor="#6B7280" />
 
@@ -173,7 +173,7 @@
                 android:id="@+id/tvSellerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tech Store Manila"
+                android:tools:text="Tech Store Manila"
                 android:textSize="14sp"
                 android:textColor="#1F2937" />
 
@@ -193,7 +193,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Note:"
+                android:text="@string/label_note_colon"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:textColor="#92400E"
@@ -203,7 +203,7 @@
                 android:id="@+id/tvPaymentMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Payment confirmation received"
+                android:tools:text="Payment confirmation received"
                 android:textSize="12sp"
                 android:textColor="#78350F" />
 
@@ -227,7 +227,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Amount Paid:"
+                android:text="@string/label_amount_paid"
                 android:textSize="14sp"
                 android:textColor="#6B7280" />
 
@@ -235,7 +235,7 @@
                 android:id="@+id/tvAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="₱22,999.00"
+                android:tools:text="₱22,999.00"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="#059669" />

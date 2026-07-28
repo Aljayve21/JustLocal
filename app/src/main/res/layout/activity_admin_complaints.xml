@@ -28,7 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Complaints"
+            android:text="@string/label_complaints"
             android:paddingLeft="8dp"
             android:textStyle="bold"
             android:textSize="18sp"
@@ -38,7 +38,7 @@
             android:id="@+id/tvTotalCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="128"
+            android:tools:text="128"
             android:textSize="12sp"
             android:textColor="#6B7280" />
 
@@ -68,7 +68,7 @@
                     android:id="@+id/btnFilterAll"
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
-                    android:text="All"
+                    android:text="@string/label_all"
                     android:textSize="12sp"
                     android:textColor="#FFFFFF"
                     android:backgroundTint="#2563EB"
@@ -78,7 +78,7 @@
                     android:id="@+id/btnFilterOpen"
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
-                    android:text="Open"
+                    android:text="@string/label_open"
                     android:textSize="12sp"
                     android:textColor="#DC2626"
                     android:backgroundTint="#FEE2E2"
@@ -88,7 +88,7 @@
                     android:id="@+id/btnFilterInReview"
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
-                    android:text="In Review"
+                    android:text="@string/label_in_review"
                     android:textSize="12sp"
                     android:textColor="#F59E0B"
                     android:backgroundTint="#FEF3C7"
@@ -98,7 +98,7 @@
                     android:id="@+id/btnFilterResolved"
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
-                    android:text="Resolved"
+                    android:text="@string/label_resolved"
                     android:textSize="12sp"
                     android:textColor="#059669"
                     android:backgroundTint="#D1FAE5" />
@@ -152,7 +152,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No complaints found"
+            android:text="@string/msg_no_complaints_found"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="#6B7280" />

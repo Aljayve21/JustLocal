@@ -33,7 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Product Management"
+            android:text="@string/label_product_management"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#1F2937"
@@ -79,7 +79,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:hint="Search products..."
+                    android:hint="@string/hint_search_products_simple"
                     android:background="@null"
                     android:paddingStart="12dp"
                     android:textSize="14sp"
@@ -114,7 +114,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total Products"
+                    android:text="@string/label_total_products"
                     android:textSize="12sp"
                     android:textColor="#6B7280" />
 
@@ -140,7 +140,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Approved"
+                    android:text="@string/label_approved"
                     android:textSize="12sp"
                     android:textColor="#6B7280" />
 
@@ -168,7 +168,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pending"
+                    android:text="@string/label_pending"
                     android:textSize="12sp"
                     android:textColor="#6B7280" />
 
@@ -199,7 +199,7 @@
                 android:id="@+id/chipAll"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:text="All Products"
+                android:text="@string/label_all_products"
                 android:textSize="12sp"
                 android:textColor="#FFFF"
                 android:background="@drawable/chip_selected"
@@ -212,7 +212,7 @@
                 android:id="@+id/chipApproved"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:text="Approved"
+                android:text="@string/label_approved"
                 android:textSize="12sp"
                 android:textColor="#6B7280"
                 android:background="@drawable/chip_unselected"
@@ -225,7 +225,7 @@
                 android:id="@+id/chipPending"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:text="Pending"
+                android:text="@string/label_pending"
                 android:textSize="12sp"
                 android:textColor="#6B7280"
                 android:background="@drawable/chip_unselected"
@@ -238,7 +238,7 @@
                 android:id="@+id/Rejected"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:text="Rejected"
+                android:text="@string/label_rejected"
                 android:textSize="12sp"
                 android:textColor="#6B7280"
                 android:background="@drawable/chip_unselected"

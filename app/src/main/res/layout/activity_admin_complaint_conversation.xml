@@ -39,7 +39,7 @@
             android:id="@+id/tvHeaderStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Open"
+            android:text="@string/label_open"
             android:textSize="10sp"
             android:textStyle="bold"
             android:textColor="#DC2626"

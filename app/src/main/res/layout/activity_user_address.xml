@@ -42,7 +42,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Address"
+                android:text="@string/label_address"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="#1F2937"
@@ -66,7 +66,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Address Type"
+                android:text="@string/label_address_type"
                 android:textColor="#1F2937"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -83,14 +83,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#1F2937"
-                    android:text="Home" />
+                    android:text="@string/label_home" />
 
                 <RadioButton
                     android:id="@+id/rbOffice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#1F2937"
-                    android:text="Office"
+                    android:text="@string/label_office"
                     android:layout_marginStart="24dp" />
             </RadioGroup>
 
@@ -201,7 +201,7 @@
                 android:id="@+id/cbDefaultAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Set as Default Address"
+                android:text="@string/label_default_address"
                 android:textColor="#1F2937"
                 android:textSize="14sp"
                 android:layout_marginTop="16dp" />
@@ -213,7 +213,7 @@
             android:id="@+id/btnSaveAddress"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="Save Address"
+            android:text="@string/label_save_address"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
